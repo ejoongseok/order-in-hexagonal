@@ -3,6 +3,7 @@ package kata.orderinhexagonal.item;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import kata.orderinhexagonal.item.adapter.out.persistence.CreateItemAdapter;
 import kata.orderinhexagonal.item.application.port.out.SaveItemPort;
 import kata.orderinhexagonal.item.domain.Item;
 
@@ -26,11 +27,4 @@ class SaveItemPortTest {
 
 	}
 
-	private static class CreateItemAdapter implements SaveItemPort {
-		ItemRepository itemRepository = new MemoryItemRepository();
-		@Override
-		public void saveItem(Item item) {
-			itemRepository.save(item);
-		}
-	}
 }
