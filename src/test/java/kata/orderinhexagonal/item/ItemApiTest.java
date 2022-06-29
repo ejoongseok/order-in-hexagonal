@@ -13,6 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kata.orderinhexagonal.item.application.port.in.CreateItemRequest;
+import kata.orderinhexagonal.item.application.port.in.CreateItemResponse;
+
 @SpringBootTest
 class ItemApiTest {
 
@@ -40,40 +43,4 @@ class ItemApiTest {
 		Assertions.assertThat(createItemResponse.getStockQuantity()).isZero();
 	}
 
-	private static class CreateItemResponse {
-		private long id;
-		private String name;
-		private int price;
-		private int stockQuantity;
-
-		public long getId() {
-			return id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public int getPrice() {
-			return price;
-		}
-
-		public int getStockQuantity() {
-			return stockQuantity;
-		}
-	}
-
-	private static class CreateItemRequest {
-		private String name;
-		private int price;
-
-		public CreateItemRequest(String name, int price) {
-			this.name = name;
-			this.price = price;
-		}
-
-		public static CreateItemRequest of(String name, int price) {
-			return new CreateItemRequest(name, price);
-		}
-	}
 }
