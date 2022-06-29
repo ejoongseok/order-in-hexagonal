@@ -28,4 +28,8 @@ public class Item {
 	public Integer getStockQuantity() {
 		return stockQuantity;
 	}
+
+	public void assignId(long id) {
+		this.id = id;
+	}
 }
