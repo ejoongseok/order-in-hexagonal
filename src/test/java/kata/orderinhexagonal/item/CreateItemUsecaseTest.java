@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import kata.orderinhexagonal.item.application.port.in.CreateItemRequest;
+import kata.orderinhexagonal.item.application.port.in.CreateItemUsecase;
 import kata.orderinhexagonal.item.domain.Item;
 
 class CreateItemUsecaseTest {
