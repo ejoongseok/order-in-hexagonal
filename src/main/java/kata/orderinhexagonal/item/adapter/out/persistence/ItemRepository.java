@@ -1,7 +1,6 @@
 package kata.orderinhexagonal.item.adapter.out.persistence;
 
-import kata.orderinhexagonal.item.domain.Item;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ItemRepository {
-	void save(Item item);
+public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 }
