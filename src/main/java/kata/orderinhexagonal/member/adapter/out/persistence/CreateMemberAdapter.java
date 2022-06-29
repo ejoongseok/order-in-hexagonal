@@ -4,8 +4,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import kata.orderinhexagonal.member.application.port.out.MemberJoinValidator;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
+import kata.orderinhexagonal.member.application.port.out.SaveMemberPort;
+import kata.orderinhexagonal.member.domain.Member;
 
-public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator {
+public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator, SaveMemberPort {
 
 	MemberRepository memberRepository = new MemoryMemberRepository();
 
@@ -22,4 +24,8 @@ public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator
 		return false;
 	}
 
+	@Override
+	public void save(Member member) {
+		memberRepository.save(member);
+	}
 }
