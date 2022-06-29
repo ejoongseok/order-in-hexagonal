@@ -33,7 +33,11 @@ class CreateMemberUsecaseTest {
 	private class MemberService implements CreateMemberUsecase {
 		@Override
 		public Member join(CreateMemberRequest request) {
-			return null;
+			joinValidator.verifyExistsEmail(request.getEmail());
+			String encodedPassword = passwordEncoder.encode(request.getPassword());
+			Member member = new Member(request.getEmail(), encodedPassword, request.getName(), request.getLocation());
+			saveMemberPort.save(member);
+			return member;
 		}
 	}
 }
