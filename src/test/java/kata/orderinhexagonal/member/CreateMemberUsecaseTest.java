@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import kata.orderinhexagonal.member.adapter.out.persistence.MemberRepository;
+import kata.orderinhexagonal.member.adapter.out.persistence.MemberSpringDataJpaRepository;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
 import kata.orderinhexagonal.member.domain.Member;
@@ -17,7 +17,7 @@ class CreateMemberUsecaseTest {
 	@Autowired CreateMemberUsecase memberService;
 
 	@Autowired
-	MemberRepository memberRepository;
+	MemberSpringDataJpaRepository memberRepository;
 
 	@BeforeEach
 	void setUp() {

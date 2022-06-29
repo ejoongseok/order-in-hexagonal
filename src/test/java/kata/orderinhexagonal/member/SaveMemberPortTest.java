@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import kata.orderinhexagonal.member.adapter.out.persistence.CreateMemberAdapter;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
 import kata.orderinhexagonal.member.application.port.out.SaveMemberPort;
 import kata.orderinhexagonal.member.domain.Member;

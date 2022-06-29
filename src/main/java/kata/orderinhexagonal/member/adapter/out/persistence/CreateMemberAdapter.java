@@ -13,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator, SaveMemberPort {
 
-	private final MemberRepository memberRepository;
+	private final MemberSpringDataJpaRepository memberRepository;
+
+	private final MemberMapper memberMapper;
 
 	@Override
 	public String encode(String password) {
@@ -30,6 +32,8 @@ public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator
 
 	@Override
 	public void save(Member member) {
-		memberRepository.save(member);
+		MemberEntity entity = memberMapper.toEntity(member);
+		memberRepository.save(entity);
+		member.assignId(entity.getId());
 	}
 }
