@@ -9,7 +9,7 @@ import kata.orderinhexagonal.item.domain.Item;
 
 class ItemServiceTest {
 
-	ItemService itemService;
+	ItemService itemService = new ItemService();
 
 	@Test
 	void createItemTest() {

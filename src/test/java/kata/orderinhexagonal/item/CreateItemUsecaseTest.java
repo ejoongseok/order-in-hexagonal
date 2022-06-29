@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import kata.orderinhexagonal.item.application.port.in.CreateItemRequest;
 import kata.orderinhexagonal.item.application.port.in.CreateItemUsecase;
+import kata.orderinhexagonal.item.application.service.ItemService;
 import kata.orderinhexagonal.item.domain.Item;
 
 class CreateItemUsecaseTest {
 
-	CreateItemUsecase createItemUsecase;
+	CreateItemUsecase createItemUsecase = new ItemService();
 
 	@Test
 	void 상품등록() {
