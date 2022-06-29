@@ -2,6 +2,7 @@ package kata.orderinhexagonal.member.application.service;
 
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
+import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
 import kata.orderinhexagonal.member.domain.Member;
 
 public class MemberService implements CreateMemberUsecase {
