@@ -1,5 +1,6 @@
 package kata.orderinhexagonal.member.application.port.in;
 
+import kata.orderinhexagonal.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +13,10 @@ public class CreateMemberResponse {
 	private String email;
 	private String location;
 
-	public CreateMemberResponse(String email, String name, String location) {
-		this.email = email;
-		this.name = name;
-		this.location = location;
+	public CreateMemberResponse(Member member) {
+		this.id = member.getId();
+		this.name = member.getName();
+		this.email = member.getEmail();
+		this.location = member.getLocation();
 	}
 }
