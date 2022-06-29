@@ -2,10 +2,10 @@ package kata.orderinhexagonal.item;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import java.io.UnsupportedEncodingException;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -13,12 +13,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
-
+@SpringBootTest
 class ItemApiTest {
 
-	MockMvc mockMvc;
-	ObjectMapper objectMapper;
+	@Autowired MockMvc mockMvc;
+	@Autowired ObjectMapper objectMapper;
 
 	@Test
 	void 상품_등록() throws Exception {
