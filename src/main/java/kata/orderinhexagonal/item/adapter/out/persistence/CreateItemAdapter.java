@@ -14,5 +14,6 @@ public class CreateItemAdapter implements SaveItemPort {
 	@Override
 	public void saveItem(Item item) {
 		itemRepository.save(item);
+		item.initializeStockQuantity(0);
 	}
 }
