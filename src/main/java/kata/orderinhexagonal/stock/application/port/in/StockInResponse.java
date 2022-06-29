@@ -1,20 +1,16 @@
 package kata.orderinhexagonal.stock.application.port.in;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StockInResponse {
 
 	private long id;
+	private long itemId;
 	private int quantity;
 	private String itemName;
 
-	public long getId() {
-		return id;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public String getItemName() {
-		return itemName;
-	}
 }
