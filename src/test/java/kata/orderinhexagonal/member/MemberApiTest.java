@@ -13,6 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
+import kata.orderinhexagonal.member.application.port.in.CreateMemberResponse;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 class MemberApiTest {
@@ -42,56 +45,4 @@ class MemberApiTest {
 		Assertions.assertThat(createMemberResponse.getLocation()).isEqualTo(location);
 	}
 
-	private static class CreateMemberResponse {
-		private long id;
-		private String name;
-		private String email;
-		private String location;
-
-		public long getId() {
-			return id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public String getLocation() {
-			return location;
-		}
-	}
-
-	private static class CreateMemberRequest {
-		private String email;
-		private String password;
-		private String name;
-		private String location;
-
-		public CreateMemberRequest(String email, String password, String name, String location) {
-			this.email = email;
-			this.password = password;
-			this.name = name;
-			this.location = location;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public String getPassword() {
-			return password;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public String getLocation() {
-			return location;
-		}
-	}
 }
