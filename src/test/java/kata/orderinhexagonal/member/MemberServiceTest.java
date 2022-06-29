@@ -5,6 +5,9 @@ import static org.mockito.Mockito.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
 import kata.orderinhexagonal.member.application.port.out.MemberJoinValidator;
@@ -13,13 +16,15 @@ import kata.orderinhexagonal.member.application.port.out.SaveMemberPort;
 import kata.orderinhexagonal.member.application.service.MemberService;
 import kata.orderinhexagonal.member.domain.Member;
 
+@SpringBootTest
 class MemberServiceTest {
 
-	@Spy MemberJoinValidator joinValidator;
-	@Spy PasswordEncoder passwordEncoder;
-	@Spy SaveMemberPort saveMemberPort;
+	@SpyBean
+	MemberJoinValidator joinValidator;
+	@SpyBean PasswordEncoder passwordEncoder;
+	@SpyBean SaveMemberPort saveMemberPort;
 
-	MemberService memberService = new MemberService();
+	@Autowired MemberService memberService;
 
 	@Test
 	void join() {
