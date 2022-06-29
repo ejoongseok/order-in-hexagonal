@@ -7,11 +7,13 @@ import kata.orderinhexagonal.member.application.port.out.MemberJoinValidator;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
 import kata.orderinhexagonal.member.application.port.out.SaveMemberPort;
 import kata.orderinhexagonal.member.domain.Member;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator, SaveMemberPort {
 
-	MemberRepository memberRepository = new MemoryMemberRepository();
+	private final MemberRepository memberRepository;
 
 	@Override
 	public String encode(String password) {

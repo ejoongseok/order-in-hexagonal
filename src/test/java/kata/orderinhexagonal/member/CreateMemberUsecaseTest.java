@@ -1,10 +1,12 @@
 package kata.orderinhexagonal.member;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import kata.orderinhexagonal.member.adapter.out.persistence.MemberRepository;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
 import kata.orderinhexagonal.member.domain.Member;
@@ -13,6 +15,15 @@ import kata.orderinhexagonal.member.domain.Member;
 class CreateMemberUsecaseTest {
 
 	@Autowired CreateMemberUsecase memberService;
+
+	@Autowired
+	MemberRepository memberRepository;
+
+	@BeforeEach
+	void setUp() {
+	    memberRepository.deleteAll();
+	}
+
 
 	@Test
 	void join() {

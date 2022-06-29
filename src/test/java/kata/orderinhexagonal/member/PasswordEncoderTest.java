@@ -2,13 +2,16 @@ package kata.orderinhexagonal.member;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.member.adapter.out.persistence.CreateMemberAdapter;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
 
+@SpringBootTest
 class PasswordEncoderTest {
 
-	private PasswordEncoder passwordEncoder = new CreateMemberAdapter();
+	@Autowired PasswordEncoder passwordEncoder;
 
 	@Test
 	void 비밀번호_인코딩() {

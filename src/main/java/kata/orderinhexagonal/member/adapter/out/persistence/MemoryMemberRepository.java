@@ -4,8 +4,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.stereotype.Repository;
+
 import kata.orderinhexagonal.member.domain.Member;
 
+@Repository
 public class MemoryMemberRepository	implements MemberRepository {
 
 	private final Map<Long, Member> memoryPersistence = new ConcurrentHashMap<>();
@@ -20,6 +23,11 @@ public class MemoryMemberRepository	implements MemberRepository {
 	public void save(Member member) {
 		member.assignId(nextId());
 		memoryPersistence.put(member.getId(), member);
+	}
+
+	@Override
+	public void deleteAll() {
+		memoryPersistence.clear();
 	}
 
 	private long nextId() {

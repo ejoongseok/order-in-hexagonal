@@ -2,19 +2,22 @@ package kata.orderinhexagonal.member;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.member.adapter.out.persistence.CreateMemberAdapter;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
 import kata.orderinhexagonal.member.application.port.out.SaveMemberPort;
 import kata.orderinhexagonal.member.domain.Member;
 
+@SpringBootTest
 class SaveMemberPortTest {
-	private SaveMemberPort saveMemberPort = new CreateMemberAdapter();
+	@Autowired SaveMemberPort saveMemberPort;
+	@Autowired PasswordEncoder passwordEncoder;
 
 	@Test
 	void member_save() {
 		// given
-		PasswordEncoder passwordEncoder = new CreateMemberAdapter();
 		String email = "ejoongseok@gmail.com";
 		String password = "ejoongseok1234!";
 		String name = "이중석";
