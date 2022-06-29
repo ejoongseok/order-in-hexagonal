@@ -8,7 +8,7 @@ import kata.orderinhexagonal.item.domain.Item;
 
 class SaveItemPortTest {
 
-	SaveItemPort saveItemPort;
+	SaveItemPort saveItemPort = new CreateItemAdapter();
 
 	@Test
 	void saveItemTest() {
@@ -26,4 +26,11 @@ class SaveItemPortTest {
 
 	}
 
+	private static class CreateItemAdapter implements SaveItemPort {
+		ItemRepository itemRepository = new MemoryItemRepository();
+		@Override
+		public void saveItem(Item item) {
+			itemRepository.save(item);
+		}
+	}
 }
