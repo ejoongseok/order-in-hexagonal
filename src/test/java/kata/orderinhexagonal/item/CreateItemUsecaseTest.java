@@ -1,10 +1,10 @@
 package kata.orderinhexagonal.item;
 
-import org.apache.tomcat.util.http.fileupload.FileItemFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import kata.orderinhexagonal.item.application.port.in.CreateItemRequest;
+import kata.orderinhexagonal.item.domain.Item;
 
 class CreateItemUsecaseTest {
 
@@ -25,26 +25,4 @@ class CreateItemUsecaseTest {
 		Assertions.assertThat(item.getStockQuantity()).isEqualTo(0);
 	}
 
-	private static class Item {
-		private Long id;
-		private String name;
-		private Integer price;
-		private Integer stockQuantity;
-
-		public Long getId() {
-			return id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public Integer getPrice() {
-			return price;
-		}
-
-		public Integer getStockQuantity() {
-			return stockQuantity;
-		}
-	}
 }
