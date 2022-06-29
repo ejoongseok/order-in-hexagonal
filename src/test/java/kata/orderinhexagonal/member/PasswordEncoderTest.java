@@ -1,9 +1,9 @@
 package kata.orderinhexagonal.member;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import kata.orderinhexagonal.member.adapter.out.persistence.CreateMemberAdapter;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
 
 class PasswordEncoderTest {
@@ -18,12 +18,5 @@ class PasswordEncoderTest {
 		String encodedPassword = passwordEncoder.encode(password);
 		// then
 		Assertions.assertThat(password).isNotEqualTo(encodedPassword);
-	}
-
-	private static class CreateMemberAdapter implements PasswordEncoder {
-		@Override
-		public String encode(String password) {
-			return new DigestUtils("SHA3-256").digestAsHex(password);
-		}
 	}
 }
