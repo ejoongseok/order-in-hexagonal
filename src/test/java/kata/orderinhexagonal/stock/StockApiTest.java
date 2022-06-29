@@ -50,6 +50,7 @@ class StockApiTest {
 		StockInResponse stockInResponse = objectMapper.readValue(response.getContentAsString(), StockInResponse.class);
 		Assertions.assertThat(stockInResponse.getId()).isPositive();
 		Assertions.assertThat(stockInResponse.getQuantity()).isEqualTo(quantity);
+		Assertions.assertThat(stockInResponse.getItemId()).isEqualTo(item.getId());
 		Assertions.assertThat(stockInResponse.getItemName()).isEqualTo(name);
 		Assertions.assertThat(item.getStockQuantity()).isEqualTo(quantity);
 	}
