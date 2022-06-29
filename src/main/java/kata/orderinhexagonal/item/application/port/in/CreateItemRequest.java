@@ -2,6 +2,7 @@ package kata.orderinhexagonal.item.application.port.in;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,8 +15,8 @@ public class CreateItemRequest {
 	private String name;
 
 	@Min(value = 1, message = "상품 가격은 1원 이상이어야 합니다")
-	@NotBlank(message = "상품 가격을 입력해 주세요")
-	private int price;
+	@NotNull(message = "상품 가격을 입력해 주세요")
+	private Integer price;
 
 	public CreateItemRequest(String name, int price) {
 		this.name = name;
