@@ -10,5 +10,10 @@ public class CreateItemResponse {
 	private long id;
 	private String name;
 	private int price;
-	private int stockQuantity;
+	private long stockQuantity;
+
+	public CreateItemResponse(String name, int price) {
+		this.name = name;
+		this.price = price;
+	}
 }
