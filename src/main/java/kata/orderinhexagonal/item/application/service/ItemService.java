@@ -10,7 +10,7 @@ public class ItemService implements CreateItemUsecase {
 
 	@Override
 	public Item createItem(CreateItemRequest request) {
-		Item item = new Item(request);
+		Item item = new Item(request.getName(), request.getPrice());
 		saveItemPort.saveItem(item);
 		return item;
 	}
