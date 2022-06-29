@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.stock.application.port.in.StockInRequest;
+import kata.orderinhexagonal.stock.application.port.in.StockInResponse;
 
 class StockApiTest {
 
@@ -43,39 +45,6 @@ class StockApiTest {
 		Assertions.assertThat(stockInResponse.getQuantity()).isEqualTo(quantity);
 		Assertions.assertThat(stockInResponse.getItemName()).isEqualTo(name);
 		Assertions.assertThat(item.getStockQuantity()).isEqualTo(quantity);
-	}
-
-	private static class StockInResponse {
-
-		private long id;
-		private int quantity;
-		private String itemName;
-
-		public long getId() {
-			return id;
-		}
-
-		public int getQuantity() {
-			return quantity;
-		}
-
-		public String getItemName() {
-			return itemName;
-		}
-	}
-	private static class StockInRequest {
-		private final Long itemId;
-		private final int quantity;
-
-		public StockInRequest(Long itemId, int quantity) {
-
-			this.itemId = itemId;
-			this.quantity = quantity;
-		}
-
-		public static StockInRequest of(Long itemId, int quantity) {
-			return new StockInRequest(itemId, quantity);
-		}
 	}
 
 	void 상품_출고() throws Exception {
