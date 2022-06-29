@@ -1,12 +1,14 @@
 package kata.orderinhexagonal.member.adapter.out.persistence;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.stereotype.Component;
 
 import kata.orderinhexagonal.member.application.port.out.MemberJoinValidator;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
 import kata.orderinhexagonal.member.application.port.out.SaveMemberPort;
 import kata.orderinhexagonal.member.domain.Member;
 
+@Component
 public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator, SaveMemberPort {
 
 	MemberRepository memberRepository = new MemoryMemberRepository();
