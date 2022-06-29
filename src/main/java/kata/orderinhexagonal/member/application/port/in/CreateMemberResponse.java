@@ -11,4 +11,10 @@ public class CreateMemberResponse {
 	private String name;
 	private String email;
 	private String location;
+
+	public CreateMemberResponse(String email, String name, String location) {
+		this.email = email;
+		this.name = name;
+		this.location = location;
+	}
 }
