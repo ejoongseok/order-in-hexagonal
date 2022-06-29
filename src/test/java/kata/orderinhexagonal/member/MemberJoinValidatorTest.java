@@ -11,11 +11,11 @@ class MemberJoinValidatorTest {
 	private final MemberJoinValidator memberJoinValidator = new CreateMemberAdapter();
 
 	@Test
-	이메일_존재여부_확인() {
+	void 이메일_존재여부_확인() {
 		//given
 		String email = "ejoongseok@gmail.com";
 		//when
-		boolean verify = memberJoinValidator.existsEmail(email);
+		boolean verify = memberJoinValidator.verifyExistsEmail(email);
 		//then
 		Assertions.assertThat(verify).isFalse();
 	}
