@@ -12,18 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kata.orderinhexagonal.item.application.port.in.CreateItemRequest;
 import kata.orderinhexagonal.item.application.port.in.CreateItemResponse;
+import kata.orderinhexagonal.item.application.service.ItemService;
+import kata.orderinhexagonal.item.domain.Item;
 
 @RestController
 @RequestMapping("/items")
 public class ItemController {
 
+	ItemService itemService = new ItemService();
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public CreateItemResponse create(@RequestBody @Valid CreateItemRequest request, Errors errors) {
+	public CreateItemResponse createItem(@RequestBody @Valid CreateItemRequest request, Errors errors) {
 		if (errors.hasErrors()) {
 			throw new IllegalArgumentException(errors.getAllErrors().toString());
 		}
-		return new CreateItemResponse(request.getName(), request.getPrice());
+		Item item = itemService.createItem(request);
+		return new CreateItemResponse(item);
 	}
 }
