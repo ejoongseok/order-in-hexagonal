@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
-import kata.orderinhexagonal.member.application.service.MemberService;
 import kata.orderinhexagonal.member.domain.Member;
 
 @SpringBootTest
