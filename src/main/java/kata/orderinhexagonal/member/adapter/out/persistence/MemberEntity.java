@@ -1,5 +1,6 @@
 package kata.orderinhexagonal.member.adapter.out.persistence;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,9 +16,13 @@ public class MemberEntity {
 	@Id
 	@GeneratedValue
 	private long id;
+	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false, unique = true)
 	private String email;
+	@Column(nullable = false)
 	private String password;
+	@Column(nullable = false)
 	private String location;
 
 	public MemberEntity(String name, String email, String password, String location) {
