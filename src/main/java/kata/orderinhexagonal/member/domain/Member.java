@@ -16,5 +16,9 @@ public class Member {
 		this.name = name;
 		this.location = location;
 	}
+
+	public void assignId(long nextId) {
+		this.id = nextId;
+	}
 }
 
