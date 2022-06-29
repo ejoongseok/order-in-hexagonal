@@ -3,6 +3,9 @@ package kata.orderinhexagonal.stock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import org.assertj.core.api.Assertions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -15,12 +18,14 @@ import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.stock.application.port.in.StockInRequest;
 import kata.orderinhexagonal.stock.application.port.in.StockInResponse;
 
+@SpringBootTest
+@AutoConfigureMockMvc
 class StockApiTest {
 
-	ObjectMapper objectMapper;
-	MockMvc mockMvc;
+	@Autowired ObjectMapper objectMapper;
+	@Autowired MockMvc mockMvc;
 
-	ItemFixture itemFixture;
+	@Autowired ItemFixture itemFixture;
 
 	void 상품_입고() throws Exception {
 		//given
