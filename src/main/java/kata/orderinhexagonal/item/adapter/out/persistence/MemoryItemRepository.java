@@ -12,6 +12,7 @@ public class MemoryItemRepository implements ItemRepository {
 	@Override
 	public void save(Item item) {
 		item.assignId(sequence.getAndIncrement());
+		item.initializeStockQuantity(0);
 		persistenceMap.put(item.getId(), item);
 	}
 }

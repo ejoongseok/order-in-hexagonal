@@ -32,4 +32,8 @@ public class Item {
 	public void assignId(long id) {
 		this.id = id;
 	}
+
+	public void initializeStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
 }
