@@ -3,11 +3,12 @@ package kata.orderinhexagonal.item;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import kata.orderinhexagonal.item.application.port.out.SaveItemPort;
 import kata.orderinhexagonal.item.domain.Item;
 
 class SaveItemPortTest {
 
-	private SaveItemPort saveItemPort;
+	SaveItemPort saveItemPort;
 
 	@Test
 	void saveItemTest() {
