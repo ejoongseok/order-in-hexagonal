@@ -15,7 +15,11 @@ public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator
 	}
 
 	@Override
-	public boolean existsEmail(String email) {
-		return memberRepository.existsByEmail(email);
+	public boolean verifyExistsEmail(String email) {
+		if(memberRepository.existsByEmail(email)) {
+			throw new ExistsEmailException("이미 존재하는 이메일입니다.");
+		}
+		return false;
 	}
+
 }
