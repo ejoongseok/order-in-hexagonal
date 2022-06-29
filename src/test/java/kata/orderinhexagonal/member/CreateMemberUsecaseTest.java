@@ -2,15 +2,18 @@ package kata.orderinhexagonal.member;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
 import kata.orderinhexagonal.member.application.service.MemberService;
 import kata.orderinhexagonal.member.domain.Member;
 
+@SpringBootTest
 class CreateMemberUsecaseTest {
 
-	private CreateMemberUsecase memberService = new MemberService();
+	@Autowired CreateMemberUsecase memberService;
 
 	@Test
 	void join() {
@@ -27,7 +30,7 @@ class CreateMemberUsecaseTest {
 		Assertions.assertThat(createMember.getId()).isPositive();
 		Assertions.assertThat(createMember.getName()).isEqualTo(name);
 		Assertions.assertThat(createMember.getEmail()).isEqualTo(email);
-		Assertions.assertThat(createMember.getPassword()).isEqualTo(password);
+		Assertions.assertThat(createMember.getPassword()).isNotEqualTo(password);
 		Assertions.assertThat(createMember.getLocation()).isEqualTo(location);
 	}
 
