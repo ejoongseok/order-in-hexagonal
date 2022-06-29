@@ -6,6 +6,9 @@ import kata.orderinhexagonal.member.application.port.out.MemberJoinValidator;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
 
 public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator {
+
+	MemberRepository memberRepository = new MemoryMemberRepository();
+
 	@Override
 	public String encode(String password) {
 		return new DigestUtils("SHA3-256").digestAsHex(password);
@@ -13,6 +16,6 @@ public class CreateMemberAdapter implements PasswordEncoder, MemberJoinValidator
 
 	@Override
 	public boolean existsEmail(String email) {
-		return false;
+		return memberRepository.existsByEmail(email);
 	}
 }
