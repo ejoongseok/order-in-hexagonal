@@ -22,7 +22,7 @@ class CreateItemUsecaseTest {
 		Assertions.assertThat(item.getId()).isPositive();
 		Assertions.assertThat(item.getName()).isEqualTo(name);
 		Assertions.assertThat(item.getPrice()).isEqualTo(price);
-		Assertions.assertThat(item.getStockQuantity()).isEqualTo(0);
+		Assertions.assertThat(item.getStockQuantity()).isZero();
 	}
 
 }
