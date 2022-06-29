@@ -8,9 +8,9 @@ public class Item {
 	private Integer price;
 	private Integer stockQuantity;
 
-	public Item(CreateItemRequest request) {
-		this.name = request.getName();
-		this.price = request.getPrice();
+	public Item(String name, Integer price) {
+		this.name = name;
+		this.price = price;
 	}
 
 	public Long getId() {
