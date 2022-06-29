@@ -3,6 +3,7 @@ package kata.orderinhexagonal.stock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +28,7 @@ class StockApiTest {
 
 	@Autowired ItemFixture itemFixture;
 
+	@Test
 	void 상품_입고() throws Exception {
 		//given
 		String name = "노트북";
