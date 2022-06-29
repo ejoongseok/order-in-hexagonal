@@ -1,5 +1,8 @@
 package kata.orderinhexagonal.member.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Member {
 	private long id;
 	private String name;
@@ -7,23 +10,11 @@ public class Member {
 	private String password;
 	private String location;
 
-	public long getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public String getLocation() {
-		return location;
+	public Member(String email, String encodedPassword, String name, String location) {
+		this.email = email;
+		this.password = encodedPassword;
+		this.name = name;
+		this.location = location;
 	}
 }
+
