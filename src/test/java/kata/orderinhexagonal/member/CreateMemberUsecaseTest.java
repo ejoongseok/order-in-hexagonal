@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
+import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
+import kata.orderinhexagonal.member.domain.Member;
 
 class CreateMemberUsecaseTest {
 
@@ -28,31 +30,10 @@ class CreateMemberUsecaseTest {
 		Assertions.assertThat(createMember.getLocation()).isEqualTo(location);
 	}
 
-	private static class Member {
-		private long id;
-		private String name;
-		private String email;
-		private String password;
-		private String location;
-
-		public long getId() {
-			return id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public String getPassword() {
-			return password;
-		}
-
-		public String getLocation() {
-			return location;
+	private class MemberService implements CreateMemberUsecase {
+		@Override
+		public Member join(CreateMemberRequest request) {
+			return null;
 		}
 	}
 }
