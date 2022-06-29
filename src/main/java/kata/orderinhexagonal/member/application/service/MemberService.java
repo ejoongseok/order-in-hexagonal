@@ -5,6 +5,10 @@ import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
 import kata.orderinhexagonal.member.domain.Member;
 
 public class MemberService implements CreateMemberUsecase {
+	private MemberJoinValidator joinValidator;
+	private PasswordEncoder passwordEncoder;
+	private SaveMemberPort saveMemberPort;
+
 	@Override
 	public Member join(CreateMemberRequest request) {
 		joinValidator.verifyExistsEmail(request.getEmail());
