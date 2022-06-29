@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import kata.orderinhexagonal.member.adapter.out.persistence.CreateMemberAdapter;
 import kata.orderinhexagonal.member.application.port.out.PasswordEncoder;
+import kata.orderinhexagonal.member.application.port.out.SaveMemberPort;
 import kata.orderinhexagonal.member.domain.Member;
 
 class SaveMemberPortTest {
-	private SaveMemberPort saveMemberPort;
+	private SaveMemberPort saveMemberPort = new CreateMemberAdapter();
 
 	@Test
 	void member_save() {
