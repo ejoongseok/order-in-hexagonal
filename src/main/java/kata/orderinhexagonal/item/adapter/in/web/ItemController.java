@@ -14,12 +14,14 @@ import kata.orderinhexagonal.item.application.port.in.CreateItemRequest;
 import kata.orderinhexagonal.item.application.port.in.CreateItemResponse;
 import kata.orderinhexagonal.item.application.service.ItemService;
 import kata.orderinhexagonal.item.domain.Item;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/items")
+@RequiredArgsConstructor
 public class ItemController {
 
-	ItemService itemService = new ItemService();
+	private final ItemService itemService;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

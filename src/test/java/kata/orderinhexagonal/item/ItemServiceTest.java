@@ -2,14 +2,17 @@ package kata.orderinhexagonal.item;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.item.application.port.in.CreateItemRequest;
 import kata.orderinhexagonal.item.application.service.ItemService;
 import kata.orderinhexagonal.item.domain.Item;
 
+@SpringBootTest
 class ItemServiceTest {
 
-	ItemService itemService = new ItemService();
+	@Autowired ItemService itemService;
 
 	@Test
 	void createItemTest() {

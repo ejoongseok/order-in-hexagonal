@@ -2,14 +2,17 @@ package kata.orderinhexagonal.item;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.item.adapter.out.persistence.CreateItemAdapter;
 import kata.orderinhexagonal.item.application.port.out.SaveItemPort;
 import kata.orderinhexagonal.item.domain.Item;
 
+@SpringBootTest
 class SaveItemPortTest {
 
-	SaveItemPort saveItemPort = new CreateItemAdapter();
+	@Autowired SaveItemPort saveItemPort;
 
 	@Test
 	void saveItemTest() {
