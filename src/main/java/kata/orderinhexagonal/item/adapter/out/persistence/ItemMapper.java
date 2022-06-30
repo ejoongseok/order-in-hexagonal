@@ -7,7 +7,10 @@ import kata.orderinhexagonal.item.domain.Item;
 @Component
 public class ItemMapper {
 
-	ItemEntity toEntity(Item domain) {
+	public ItemEntity toEntity(Item domain) {
 		return new ItemEntity(domain.getName(), domain.getPrice(), domain.getStockQuantity());
+	}
+	public Item toDomain(ItemEntity entity) {
+		return new Item(entity.getId(), entity.getName(), entity.getPrice(), entity.getStockQuantity());
 	}
 }
