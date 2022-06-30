@@ -29,7 +29,18 @@ public class Item {
 		this.stockQuantity = stockQuantity;
 	}
 
-	public void stockIn(Integer quantity) {
+	public void stockInQuantity(Integer quantity) {
 		this.stockQuantity += quantity;
+	}
+
+	public void stockOutQuantity(Integer stockOutQuantity) {
+		verifyStockOutQuantityIsGreaterThanCurrentStockQuantity(stockOutQuantity);
+		this.stockQuantity -= stockOutQuantity;
+	}
+
+	private void verifyStockOutQuantityIsGreaterThanCurrentStockQuantity(Integer stockOutQuantity) {
+		if(this.stockQuantity > stockOutQuantity) {
+			throw new IllegalArgumentException("재고 수량이 부족합니다.");
+		}
 	}
 }
