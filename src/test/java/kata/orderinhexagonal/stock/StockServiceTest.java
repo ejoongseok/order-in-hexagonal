@@ -9,6 +9,7 @@ import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.stock.application.port.in.StockInRequest;
+import kata.orderinhexagonal.stock.application.port.in.StockOutRequest;
 import kata.orderinhexagonal.stock.application.service.StockService;
 import kata.orderinhexagonal.stock.domain.Stock;
 
@@ -48,9 +49,10 @@ class StockServiceTest {
 		stockFixture.stockIn(item, stockInQuantity);
 		Item stockInItem = itemFixture.getItem(item.getId());
 		int currentQuantity = stockInItem.getStockQuantity() - stockOutQuantity;
+		StockOutRequest request = StockOutRequest.of(item.getId(), stockOutQuantity);
 
 		// when
-		Stock stockOut = stockService.stockOut(item.getId(), stockOutQuantity);
+		Stock stockOut = stockService.stockOut(request);
 		// then
 		Assertions.assertThat(stockOut.getId()).isPositive();
 		Assertions.assertThat(stockOut.getStockType()).isEqualTo(Stock.StockType.STOCK_OUT);

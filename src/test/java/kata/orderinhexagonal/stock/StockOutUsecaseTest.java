@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.stock.application.port.in.StockOutRequest;
 import kata.orderinhexagonal.stock.application.port.in.StockOutUsecase;
 import kata.orderinhexagonal.stock.domain.Stock;
 
@@ -29,9 +30,10 @@ class StockOutUsecaseTest {
 		stockFixture.stockIn(item, stockInQuantity);
 		Item stockInItem = itemFixture.getItem(item.getId());
 		int currentQuantity = stockInItem.getStockQuantity() - stockOutQuantity;
+		StockOutRequest request = StockOutRequest.of(item.getId(), stockOutQuantity);
 
 		// when
-		Stock stockOut = stockOutUsecase.stockOut(item.getId(), stockOutQuantity);
+		Stock stockOut = stockOutUsecase.stockOut(request);
 		// then
 		Assertions.assertThat(stockOut.getId()).isPositive();
 		Assertions.assertThat(stockOut.getStockType()).isEqualTo(Stock.StockType.STOCK_OUT);
