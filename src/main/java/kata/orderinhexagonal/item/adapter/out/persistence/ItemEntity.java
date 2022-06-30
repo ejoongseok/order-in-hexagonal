@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class ItemEntity {
 	@Id
 	@GeneratedValue
+	@Column(name = "item_id")
 	private Long id;
 	@Column(nullable = false)
 	private String name;
@@ -22,8 +23,8 @@ public class ItemEntity {
 	private Integer price;
 	@Column(nullable = false)
 	private Integer stockQuantity;
-
-	public ItemEntity(String name, Integer price, Integer stockQuantity) {
+	public ItemEntity(Long id, String name, Integer price, Integer stockQuantity) {
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.stockQuantity = stockQuantity;

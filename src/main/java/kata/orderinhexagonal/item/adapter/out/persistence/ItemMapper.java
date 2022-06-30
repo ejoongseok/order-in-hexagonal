@@ -8,7 +8,7 @@ import kata.orderinhexagonal.item.domain.Item;
 public class ItemMapper {
 
 	public ItemEntity toEntity(Item domain) {
-		return new ItemEntity(domain.getName(), domain.getPrice(), domain.getStockQuantity());
+		return new ItemEntity(domain.getId(), domain.getName(), domain.getPrice(), domain.getStockQuantity());
 	}
 	public Item toDomain(ItemEntity entity) {
 		return new Item(entity.getId(), entity.getName(), entity.getPrice(), entity.getStockQuantity());
