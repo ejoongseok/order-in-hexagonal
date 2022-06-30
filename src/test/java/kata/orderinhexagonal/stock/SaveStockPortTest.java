@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.stock.application.port.out.SaveStockPort;
 import kata.orderinhexagonal.stock.domain.Stock;
 import kata.orderinhexagonal.stock.domain.StockIn;
 
