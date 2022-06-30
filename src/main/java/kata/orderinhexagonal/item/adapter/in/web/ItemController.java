@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kata.orderinhexagonal.item.application.port.in.CreateItemRequest;
 import kata.orderinhexagonal.item.application.port.in.CreateItemResponse;
-import kata.orderinhexagonal.item.application.service.ItemService;
+import kata.orderinhexagonal.item.application.port.in.CreateItemUsecase;
 import kata.orderinhexagonal.item.domain.Item;
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ItemController {
 
-	private final ItemService itemService;
+	private final CreateItemUsecase createItemUsecase;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -29,7 +29,7 @@ public class ItemController {
 		if (errors.hasErrors()) {
 			throw new IllegalArgumentException(errors.getAllErrors().toString());
 		}
-		Item item = itemService.createItem(request);
+		Item item = createItemUsecase.createItem(request);
 		return new CreateItemResponse(item);
 	}
 }
