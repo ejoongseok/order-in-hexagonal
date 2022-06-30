@@ -7,12 +7,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import kata.orderinhexagonal.item.adapter.out.persistence.ItemEntity;
-import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.stock.domain.Stock;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StockEntity {
 
