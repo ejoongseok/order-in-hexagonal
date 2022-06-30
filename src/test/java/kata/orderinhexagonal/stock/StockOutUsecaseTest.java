@@ -11,13 +11,14 @@ import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.stock.application.port.in.StockOutUsecase;
 import kata.orderinhexagonal.stock.domain.Stock;
 
+@SpringBootTest
 class StockOutUsecaseTest {
 
-	ItemFixture itemFixture;
+	@Autowired ItemFixture itemFixture;
 
-	StockFixture stockFixture;
+	@Autowired StockFixture stockFixture;
 
-	StockOutUsecase stockOutUsecase;
+	@Autowired StockOutUsecase stockOutUsecase;
 
 	@Test
 	void 상품_출고() {
