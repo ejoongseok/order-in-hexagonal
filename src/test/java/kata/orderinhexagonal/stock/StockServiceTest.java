@@ -43,7 +43,7 @@ class StockServiceTest {
 			item.stockIn(request.getQuantity());
 			Stock stock = new StockIn(request.getQuantity(), item);
 			saveStockPort.save(stock);
-			return null;
+			return stock;
 		}
 
 	}
