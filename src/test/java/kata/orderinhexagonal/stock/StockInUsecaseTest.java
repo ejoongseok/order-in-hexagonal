@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.stock.application.port.in.StockInRequest;
+import kata.orderinhexagonal.stock.application.port.in.StockInUsecase;
+import kata.orderinhexagonal.stock.domain.Stock;
 
 class StockInUsecaseTest {
 
@@ -30,21 +32,4 @@ class StockInUsecaseTest {
 		Assertions.assertThat(stockInItem.getName()).isEqualTo(item.getName());
 	}
 
-	private static class Stock {
-		private Long id;
-		private Integer quantity;
-		private Item item;
-
-		public Long getId() {
-			return id;
-		}
-
-		public Integer getQuantity() {
-			return quantity;
-		}
-
-		public Item getItem() {
-			return item;
-		}
-	}
 }
