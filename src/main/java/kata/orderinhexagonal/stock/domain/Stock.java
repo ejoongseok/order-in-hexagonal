@@ -9,12 +9,16 @@ public abstract class Stock {
 	protected Integer quantity;
 	protected Item item;
 
-	public Stock(Integer quantity, Item item) {
+	protected Stock(Integer quantity, Item item) {
 		this.quantity = quantity;
 		this.item = item;
 	}
 
-	abstract public StockType getStockType();
+	public abstract StockType getStockType();
+
+	public void assignId(Long id) {
+		this.id = id;
+	}
 
 	public enum StockType {
 		STOCK_IN,
