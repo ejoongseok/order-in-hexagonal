@@ -18,6 +18,7 @@ import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.stock.application.port.in.StockInRequest;
 import kata.orderinhexagonal.stock.application.port.in.StockInResponse;
+import kata.orderinhexagonal.stock.application.port.in.StockInUsecase;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,6 +28,7 @@ class StockApiTest {
 	@Autowired MockMvc mockMvc;
 
 	@Autowired ItemFixture itemFixture;
+	@Autowired StockFixture stockFixture;
 
 	@Test
 	void 상품_입고() throws Exception {
@@ -70,11 +72,51 @@ class StockApiTest {
 
 		//then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		StockOutResponse stockOutResponse = objectMapper.readValue(response.getContentAsString(), StockOutResponse.class);
 		Assertions.assertThat(stockOutResponse.getId()).isPositive();
 		Assertions.assertThat(stockOutResponse.getQuantity()).isEqualTo(stockOutQuantity);
 		Assertions.assertThat(stockOutResponse.getItemId()).isEqualTo(item.getId());
 		Assertions.assertThat(stockOutResponse.getItemName()).isEqualTo(item.getName());
 		Item refreshItem = itemFixture.getItem(item.getId());
 		Assertions.assertThat(refreshItem.getStockQuantity()).isEqualTo(currentQuantity);
+	}
+
+	private static class StockOutRequest {
+
+		public static StockOutRequest of(Long id, int stockOutQuantity) {
+			return null;
+		}
+	}
+
+	private static class StockOutResponse {
+		private long id;
+		private int quantity;
+		private long itemId;
+		private String itemName;
+
+		public long getId() {
+			return id;
+		}
+
+		public int getQuantity() {
+			return quantity;
+		}
+
+		public long getItemId() {
+			return itemId;
+		}
+
+		public String getItemName() {
+			return itemName;
+		}
+	}
+
+	private static class StockFixture {
+
+		StockInUsecase stockInUsecase;
+
+		public void stockIn(Item item, int stockInQuantity) {
+			stockInUsecase.stockIn(StockInRequest.of(item.getId(), stockInQuantity));
+		}
 	}
 }
