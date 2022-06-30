@@ -36,4 +36,8 @@ public class Item {
 	public void initializeStockQuantity(int stockQuantity) {
 		this.stockQuantity = stockQuantity;
 	}
+
+	public void stockIn(Integer quantity) {
+		this.stockQuantity += quantity;
+	}
 }
