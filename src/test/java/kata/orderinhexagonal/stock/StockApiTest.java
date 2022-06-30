@@ -55,6 +55,12 @@ class StockApiTest {
 	}
 
 	void 상품_출고() throws Exception {
-
+		//then
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		Assertions.assertThat(stockWithOutResponse.getId()).isPositive();
+		Assertions.assertThat(stockWithOutResponse.getQuantity()).isEqualTo(withOutQuantity);
+		Assertions.assertThat(stockWithOutResponse.getItemId()).isEqualTo(item.getId());
+		Assertions.assertThat(stockWithOutResponse.getItemName()).isEqualTo(name);
+		Assertions.assertThat(refreshItem.getStockQuantity()).isEqualTo(currentQuantity);
 	}
 }
