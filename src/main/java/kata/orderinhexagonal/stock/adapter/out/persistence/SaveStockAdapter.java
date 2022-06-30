@@ -17,5 +17,6 @@ public class SaveStockAdapter implements SaveStockPort {
 	public void save(Stock stock) {
 		StockEntity stockEntity = stockMapper.toEntity(stock);
 		stockRepository.save(stockEntity);
+		stock.assignId(stockEntity.getId());
 	}
 }
