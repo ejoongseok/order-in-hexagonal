@@ -20,6 +20,8 @@ public class StockService implements StockInUsecase, StockOutUsecase {
 	private final LoadItemPort loadItemPort;
 	private final SaveStockPort saveStockPort;
 
+	// FIXED ItemEntity 수정된 StockQuantity 반영이 안됨 수정 필요
+
 	@Override
 	public Stock stockIn(StockInRequest request) {
 		Item item = loadItemPort.load(request.getItemId());
