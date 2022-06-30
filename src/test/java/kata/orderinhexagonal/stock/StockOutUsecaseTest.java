@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.stock.application.port.in.StockOutUsecase;
 import kata.orderinhexagonal.stock.domain.Stock;
 
 class StockOutUsecaseTest {
