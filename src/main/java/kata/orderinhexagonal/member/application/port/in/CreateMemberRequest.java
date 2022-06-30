@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateMemberRequest {
 
-	@Email(message = "이메일 형식이 올바르지 않습니다.")
+	@Email(message = "유효하지 않은 이메일 형식입니다.",
+		regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
 	@NotBlank(message = "이메일을 입력해주세요.")
 	private String email;
 
