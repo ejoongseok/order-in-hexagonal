@@ -55,12 +55,26 @@ class StockApiTest {
 	}
 
 	void 상품_출고() throws Exception {
+		//given
+		int stockInQuantity = 10;
+		int stockOutQuantity = 5;
+		Item item = itemFixture.createItem("노트북", 1_000_000);
+		stockFixture.stockIn(item, stockInQuantity);
+		StockOutRequest request = StockOutRequest.of(item.getId(), stockOutQuantity);
+		int currentQuantity = stockInQuantity - stockOutQuantity;
+		//when
+		MockHttpServletResponse response = mockMvc.perform(post("/stock/out")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(request)))
+			.andReturn().getResponse();
+
 		//then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		Assertions.assertThat(stockWithOutResponse.getId()).isPositive();
-		Assertions.assertThat(stockWithOutResponse.getQuantity()).isEqualTo(withOutQuantity);
-		Assertions.assertThat(stockWithOutResponse.getItemId()).isEqualTo(item.getId());
-		Assertions.assertThat(stockWithOutResponse.getItemName()).isEqualTo(name);
+		Assertions.assertThat(stockOutResponse.getId()).isPositive();
+		Assertions.assertThat(stockOutResponse.getQuantity()).isEqualTo(stockOutQuantity);
+		Assertions.assertThat(stockOutResponse.getItemId()).isEqualTo(item.getId());
+		Assertions.assertThat(stockOutResponse.getItemName()).isEqualTo(item.getName());
+		Item refreshItem = itemFixture.getItem(item.getId());
 		Assertions.assertThat(refreshItem.getStockQuantity()).isEqualTo(currentQuantity);
 	}
 }
