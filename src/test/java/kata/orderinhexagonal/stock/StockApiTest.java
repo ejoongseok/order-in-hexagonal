@@ -59,6 +59,7 @@ class StockApiTest {
 		Assertions.assertThat(stockInResponse.getItemName()).isEqualTo(name);
 	}
 
+	@Test
 	void 상품_출고() throws Exception {
 		//given
 		int stockInQuantity = 10;
