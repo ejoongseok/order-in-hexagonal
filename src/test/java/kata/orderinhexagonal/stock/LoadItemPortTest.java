@@ -2,16 +2,18 @@ package kata.orderinhexagonal.stock;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
-import kata.orderinhexagonal.stock.adapter.out.web.LoadItemAdapter;
 import kata.orderinhexagonal.stock.application.port.out.LoadItemPort;
 
+@SpringBootTest
 class LoadItemPortTest {
 
-	ItemFixture itemFixture;
-	LoadItemPort loadItemPort = new LoadItemAdapter();
+	@Autowired ItemFixture itemFixture;
+	@Autowired LoadItemPort loadItemPort;
 
 	@Test
 	void loadItemTest() {

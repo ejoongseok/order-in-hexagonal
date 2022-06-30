@@ -2,6 +2,8 @@ package kata.orderinhexagonal.stock;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
@@ -9,10 +11,11 @@ import kata.orderinhexagonal.stock.application.port.in.StockInRequest;
 import kata.orderinhexagonal.stock.application.port.in.StockInUsecase;
 import kata.orderinhexagonal.stock.domain.Stock;
 
+@SpringBootTest
 class StockInUsecaseTest {
 
-	ItemFixture itemFixture;
-	StockInUsecase stockInUsecase;
+	@Autowired ItemFixture itemFixture;
+	@Autowired StockInUsecase stockInUsecase;
 
 	@Test
 	void 상품_입고() {
