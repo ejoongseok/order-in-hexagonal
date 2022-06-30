@@ -5,5 +5,5 @@ import java.util.Optional;
 import kata.orderinhexagonal.item.domain.Item;
 
 public interface StockItemNetworkClient {
-	Optional<Item> findItemById(Long id);
+	Item findItemById(Long id);
 }
