@@ -15,10 +15,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
+import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.stock.application.port.in.StockInRequest;
 import kata.orderinhexagonal.stock.application.port.in.StockInResponse;
-import kata.orderinhexagonal.stock.application.port.in.StockInUsecase;
+import kata.orderinhexagonal.stock.application.port.in.StockOutRequest;
+import kata.orderinhexagonal.stock.application.port.in.StockOutResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -28,7 +30,8 @@ class StockApiTest {
 	@Autowired MockMvc mockMvc;
 
 	@Autowired ItemFixture itemFixture;
-	@Autowired StockFixture stockFixture;
+	@Autowired
+	StockFixture stockFixture;
 
 	@Test
 	void 상품_입고() throws Exception {
@@ -81,42 +84,4 @@ class StockApiTest {
 		Assertions.assertThat(refreshItem.getStockQuantity()).isEqualTo(currentQuantity);
 	}
 
-	private static class StockOutRequest {
-
-		public static StockOutRequest of(Long id, int stockOutQuantity) {
-			return null;
-		}
-	}
-
-	private static class StockOutResponse {
-		private long id;
-		private int quantity;
-		private long itemId;
-		private String itemName;
-
-		public long getId() {
-			return id;
-		}
-
-		public int getQuantity() {
-			return quantity;
-		}
-
-		public long getItemId() {
-			return itemId;
-		}
-
-		public String getItemName() {
-			return itemName;
-		}
-	}
-
-	private static class StockFixture {
-
-		StockInUsecase stockInUsecase;
-
-		public void stockIn(Item item, int stockInQuantity) {
-			stockInUsecase.stockIn(StockInRequest.of(item.getId(), stockInQuantity));
-		}
-	}
 }
