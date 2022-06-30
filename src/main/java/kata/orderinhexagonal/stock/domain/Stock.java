@@ -1,21 +1,23 @@
 package kata.orderinhexagonal.stock.domain;
 
 import kata.orderinhexagonal.item.domain.Item;
+import lombok.Getter;
 
-public class Stock {
-	private Long id;
-	private Integer quantity;
-	private Item item;
+@Getter
+public abstract class Stock {
+	protected Long id;
+	protected Integer quantity;
+	protected Item item;
 
-	public Long getId() {
-		return id;
+	public Stock(Integer quantity, Item item) {
+		this.quantity = quantity;
+		this.item = item;
 	}
 
-	public Integer getQuantity() {
-		return quantity;
-	}
+	abstract public StockType getStockType();
 
-	public Item getItem() {
-		return item;
+	public enum StockType {
+		STOCK_IN,
+		STOCK_OUT
 	}
 }
