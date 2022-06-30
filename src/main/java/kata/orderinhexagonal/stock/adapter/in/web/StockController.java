@@ -14,6 +14,7 @@ import kata.orderinhexagonal.stock.application.port.in.StockInResponse;
 import kata.orderinhexagonal.stock.application.port.in.StockInUsecase;
 import kata.orderinhexagonal.stock.application.port.in.StockOutRequest;
 import kata.orderinhexagonal.stock.application.port.in.StockOutResponse;
+import kata.orderinhexagonal.stock.application.port.in.StockOutUsecase;
 import kata.orderinhexagonal.stock.domain.Stock;
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class StockController {
 
 	private final StockInUsecase stockInUsecase;
+	private final StockOutUsecase stockOutUsecase;
 
 	@PostMapping("/in")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -34,6 +36,7 @@ public class StockController {
 	@PostMapping("/out")
 	@ResponseStatus(HttpStatus.OK)
 	public StockOutResponse stockOut(@RequestBody @Valid StockOutRequest request) {
-		return null;
+		Stock stock = stockOutUsecase.stockOut(request);
+		return new StockOutResponse(stock.getId(), stock.getQuantity(), stock.getItem().getId(), stock.getItem().getName());
 	}
 }
