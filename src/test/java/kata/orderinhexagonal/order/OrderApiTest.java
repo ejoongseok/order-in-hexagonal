@@ -2,7 +2,6 @@ package kata.orderinhexagonal.order;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
@@ -15,11 +14,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
+import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
-import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
-import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
 import kata.orderinhexagonal.member.domain.Member;
+import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
+import kata.orderinhexagonal.order.application.port.in.CreateOrderResponse;
+import kata.orderinhexagonal.order.application.port.in.OrderItemRequest;
+import kata.orderinhexagonal.order.domain.OrderStatus;
 
 class OrderApiTest {
 
@@ -82,90 +84,4 @@ class OrderApiTest {
 		Assertions.assertThat(refreshItem2.getStockQuantity()).isEqualTo(orderItem2.getStockQuantity() - orderQuantity2);
 	}
 
-	private static class OrderItemResponse {
-		private long itemId;
-		private int quantity;
-		private int price;
-
-		public long getItemId() {
-			return itemId;
-		}
-
-		public int getQuantity() {
-			return quantity;
-		}
-
-		public int getPrice() {
-			return price;
-		}
-	}
-
-	private class MemberFixture {
-		CreateMemberUsecase createMemberUsecase;
-		public Member createMember(String name, String email, String location) {
-			CreateMemberRequest request = new CreateMemberRequest(name, "ejoongseok1234!", email, location);
-			Member member = createMemberUsecase.join(request);
-			return member;
-		}
-	}
-
-	private static class OrderItemRequest {
-		private Long id;
-		private int orderQuantity;
-
-		public OrderItemRequest(Long id, int orderQuantity) {
-			this.id = id;
-			this.orderQuantity = orderQuantity;
-		}
-
-		public static OrderItemRequest of(Long id, int orderQuantity) {
-			return new OrderItemRequest(id, orderQuantity);
-		}
-	}
-
-	private static class CreateOrderRequest {
-		List<OrderItemRequest> orderItemRequests = new ArrayList<>();
-		public CreateOrderRequest(List<OrderItemRequest> orderItemRequests) {
-			this.orderItemRequests = orderItemRequests;
-		}
-
-		public static CreateOrderRequest of(List<OrderItemRequest> orderItemRequests) {
-			return new CreateOrderRequest(orderItemRequests);
-		}
-	}
-
-	private static class CreateOrderResponse {
-		private Long id;
-		private List<OrderItemResponse> orderItems = new ArrayList<>();
-		private int totalPrice;
-		private OrderStatus status;
-		private Member member;
-
-		public Long getId() {
-			return id;
-		}
-
-		public List<OrderItemResponse> getOrderItems() {
-			return orderItems;
-		}
-
-		public int getTotalPrice() {
-			return totalPrice;
-		}
-
-		public OrderStatus getStatus() {
-			return status;
-		}
-
-		public Member getMember() {
-			return member;
-		}
-	}
-
-	public enum OrderStatus {
-		NOT_PAYED,
-		PAYED,
-		CANCELED,
-		DELIVERED
-	}
 }
