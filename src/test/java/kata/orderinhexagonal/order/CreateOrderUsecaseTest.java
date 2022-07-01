@@ -1,6 +1,5 @@
 package kata.orderinhexagonal.order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
@@ -13,6 +12,7 @@ import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.OrderItemRequest;
+import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderStatus;
 
 class CreateOrderUsecaseTest {
@@ -45,7 +45,7 @@ class CreateOrderUsecaseTest {
 
 		OrderItemRequest orderItemRequest1 = OrderItemRequest.of(orderItem1.getId(), orderItem1Quantity);
 		OrderItemRequest orderItemRequest2 = OrderItemRequest.of(orderItem2.getId(), orderItem2Quantity);
-		CreateOrderRequest request = CreateOrderRequest.of(member, List.of(orderItemRequest1, orderItemRequest2));
+		CreateOrderRequest request = CreateOrderRequest.of(List.of(orderItemRequest1, orderItemRequest2));
 
 		// when
 		Order order = createOrderUsecase.createOrder(request);
@@ -68,59 +68,10 @@ class CreateOrderUsecaseTest {
 
 	void 주문상품_검증(Order order, int index, Item orderItem, int orderItemPrice, int orderItemQuantity) {
 		Assertions.assertThat(order.getOrderItems().get(index).getId()).isPositive();
-		Assertions.assertThat(order.getOrderItems().get(index).getItemId()).isEqualTo(orderItem.getId());
-		Assertions.assertThat(order.getOrderItems().get(index).getOrderId()).isEqualTo(order.getId());
+		Assertions.assertThat(order.getOrderItems().get(index).getItem().getId()).isEqualTo(orderItem.getId());
+		Assertions.assertThat(order.getOrderItems().get(index).getOrder().getId()).isEqualTo(order.getId());
 		Assertions.assertThat(order.getOrderItems().get(index).getOrderPrice()).isEqualTo(orderItemPrice);
 		Assertions.assertThat(order.getOrderItems().get(index).getOrderQuantity()).isEqualTo(orderItemQuantity);
 	}
 
-	private static class Order {
-		private Long id;
-		private OrderStatus status;
-		private List<OrderItem> orderItems = new ArrayList<>();
-
-		public int getTotalPrice() {
-			return orderItems.stream().mapToInt(OrderItem::getOrderPrice).sum();
-		}
-
-		public Long getId() {
-			return id;
-		}
-
-		public OrderStatus getStatus() {
-			return status;
-		}
-
-		public List<OrderItem> getOrderItems() {
-			return orderItems;
-		}
-	}
-
-	private static class OrderItem {
-		private Long id;
-		private Long itemId;
-		private Long orderId;
-		private int orderPrice;
-		private int orderQuantity;
-
-		public Long getId() {
-			return id;
-		}
-
-		public Long getItemId() {
-			return itemId;
-		}
-
-		public Long getOrderId() {
-			return orderId;
-		}
-
-		public int getOrderPrice() {
-			return orderPrice;
-		}
-
-		public int getOrderQuantity() {
-			return orderQuantity;
-		}
-	}
 }
