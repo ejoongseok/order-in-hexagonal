@@ -19,6 +19,6 @@ public class OrderController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public CreateOrderResponse createOrder(@RequestBody @Valid CreateOrderRequest request) {
-		return null;
+		return new CreateOrderResponse();
 	}
 }
