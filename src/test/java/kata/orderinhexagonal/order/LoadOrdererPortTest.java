@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.member.domain.Member;
-import kata.orderinhexagonal.order.adapter.out.web.LoadOrdererAdapter;
 import kata.orderinhexagonal.order.application.port.out.LoadOrdererPort;
 
 @SpringBootTest
@@ -16,7 +15,7 @@ class LoadOrdererPortTest {
 	@Autowired
 	MemberFixture memberFixture;
 	@Autowired
-	LoadOrdererPort loadOrdererPort = new LoadOrdererAdapter();
+	LoadOrdererPort loadOrdererPort;
 
 	@Test
 	void loadOrdererTest() {
