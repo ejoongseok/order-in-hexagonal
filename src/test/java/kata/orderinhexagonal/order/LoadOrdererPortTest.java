@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.member.domain.Member;
+import kata.orderinhexagonal.order.adapter.out.web.LoadOrdererAdapter;
 import kata.orderinhexagonal.order.application.port.out.LoadOrdererPort;
 
 @SpringBootTest
@@ -27,11 +28,4 @@ class LoadOrdererPortTest {
 		Assertions.assertThat(orderer.getId()).isEqualTo(member.getId());
 	}
 
-	private class LoadOrdererAdapter implements LoadOrdererPort {
-		ItemOrdererNetworkClient itemOrdererNetworkClient;
-		@Override
-		public Member load(long id) {
-			return itemOrdererNetworkClient.loadOrderer(id);
-		}
-	}
 }
