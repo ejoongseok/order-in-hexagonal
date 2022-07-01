@@ -17,8 +17,13 @@ public class StockItemNetworkMonolithicClient implements StockItemNetworkClient 
 
 	@Override
 	public Item findItemById(Long id) {
-		ItemEntity itemEntity = itemRepository.findById(id)
-			.orElseThrow(() -> new RuntimeException("Item not found"));
+		ItemEntity itemEntity = findItemEntityById(id);
 		return itemMapper.toDomain(itemEntity);
+	}
+
+	@Override
+	public ItemEntity findItemEntityById(Long id) {
+		return itemRepository.findById(id)
+			.orElseThrow(() -> new RuntimeException("ItemEntity not found"));
 	}
 }
