@@ -29,4 +29,8 @@ public class ItemEntity {
 		this.price = price;
 		this.stockQuantity = stockQuantity;
 	}
+
+	public void changeStockQuantity(Integer quantity) {
+		this.stockQuantity = quantity;
+	}
 }
