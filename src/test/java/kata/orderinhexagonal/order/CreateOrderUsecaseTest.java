@@ -47,6 +47,7 @@ class CreateOrderUsecaseTest {
 		OrderItemRequest orderItemRequest1 = OrderItemRequest.of(orderItem1.getId(), orderItem1Quantity);
 		OrderItemRequest orderItemRequest2 = OrderItemRequest.of(orderItem2.getId(), orderItem2Quantity);
 		CreateOrderRequest request = CreateOrderRequest.of(List.of(orderItemRequest1, orderItemRequest2));
+		request.assignOrdererId(member.getId());
 
 		// when
 		Order order = createOrderUsecase.createOrder(request);
