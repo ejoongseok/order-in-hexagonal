@@ -1,4 +1,4 @@
 package kata.orderinhexagonal.order;
 
-class OzrderApiTest {
+class OrderApiTest {
 }
