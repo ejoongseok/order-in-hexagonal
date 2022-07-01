@@ -21,7 +21,7 @@ import kata.orderinhexagonal.order.domain.OrderStatus;
 @SpringBootTest
 class CreateOrderUsecaseTest {
 
-	CreateOrderUsecase createOrderUsecase = new OrderService();
+	@Autowired CreateOrderUsecase createOrderUsecase;
 	@Autowired ItemFixture itemFixture;
 
 	@Autowired StockFixture stockFixture;
@@ -80,11 +80,4 @@ class CreateOrderUsecaseTest {
 		Assertions.assertThat(order.getOrderItems().get(index).getOrderQuantity()).isEqualTo(orderItemQuantity);
 	}
 
-	private static class OrderService implements CreateOrderUsecase {
-		@Override
-		public Order createOrder(CreateOrderRequest request) {
-
-			return null;
-		}
-	}
 }
