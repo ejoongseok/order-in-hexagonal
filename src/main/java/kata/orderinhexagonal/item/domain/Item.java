@@ -39,7 +39,7 @@ public class Item {
 	}
 
 	private void verifyStockOutQuantityIsGreaterThanCurrentStockQuantity(Integer stockOutQuantity) {
-		if(this.stockQuantity > stockOutQuantity) {
+		if(this.stockQuantity < stockOutQuantity) {
 			throw new IllegalArgumentException("재고 수량이 부족합니다.");
 		}
 	}
