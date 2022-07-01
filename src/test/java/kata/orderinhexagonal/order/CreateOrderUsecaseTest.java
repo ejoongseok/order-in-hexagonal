@@ -55,20 +55,23 @@ class CreateOrderUsecaseTest {
 		Assertions.assertThat(order.getStatus()).isEqualTo(OrderStatus.NOT_PAYED);
 		Assertions.assertThat(order.getTotalPrice()).isEqualTo(totalPrice);
 		Assertions.assertThat(order.getOrderItems()).hasSize(2);
-		Assertions.assertThat(order.getOrderItems().get(0).getId()).isPositive();
-		Assertions.assertThat(order.getOrderItems().get(0).getItemId()).isEqualTo(orderItem1.getId());
-		Assertions.assertThat(order.getOrderItems().get(0).getOrderId()).isEqualTo(order.getId());
-		Assertions.assertThat(order.getOrderItems().get(0).getOrderPrice()).isEqualTo(orderItem1Price);
-		Assertions.assertThat(order.getOrderItems().get(0).getOrderQuantity()).isEqualTo(orderItem1Quantity);
-		Assertions.assertThat(order.getOrderItems().get(1).getId()).isPositive();
-		Assertions.assertThat(order.getOrderItems().get(1).getItemId()).isEqualTo(orderItem2.getId());
-		Assertions.assertThat(order.getOrderItems().get(1).getOrderId()).isEqualTo(order.getId());
-		Assertions.assertThat(order.getOrderItems().get(1).getOrderPrice()).isEqualTo(orderItem2Price);
-		Assertions.assertThat(order.getOrderItems().get(1).getOrderQuantity()).isEqualTo(orderItem2Quantity);
-		Item refreshItem1 = itemFixture.getItem(orderItem1.getId());
-		Item refreshItem2 = itemFixture.getItem(orderItem2.getId());
-		Assertions.assertThat(refreshItem1.getStockQuantity()).isEqualTo(orderItem1.getStockQuantity() - orderItem1Quantity);
-		Assertions.assertThat(refreshItem2.getStockQuantity()).isEqualTo(orderItem2.getStockQuantity() - orderItem2Quantity);
+		주문상품_검증(order, 0, orderItem1, orderItem1Price, orderItem1Quantity);
+		주문상품_검증(order, 1, orderItem2, orderItem2Price, orderItem2Quantity);
+		상품_남은수량_검증(orderItem1, orderItem1Quantity, itemFixture.getItem(orderItem1.getId()));
+		상품_남은수량_검증(orderItem2, orderItem2Quantity, itemFixture.getItem(orderItem2.getId()));
+	}
+
+	void 상품_남은수량_검증(Item orderItem, int orderItemQuantity, Item currentItem) {
+		Assertions.assertThat(currentItem.getStockQuantity()).isEqualTo(
+			orderItem.getStockQuantity() - orderItemQuantity);
+	}
+
+	void 주문상품_검증(Order order, int index, Item orderItem, int orderItemPrice, int orderItemQuantity) {
+		Assertions.assertThat(order.getOrderItems().get(index).getId()).isPositive();
+		Assertions.assertThat(order.getOrderItems().get(index).getItemId()).isEqualTo(orderItem.getId());
+		Assertions.assertThat(order.getOrderItems().get(index).getOrderId()).isEqualTo(order.getId());
+		Assertions.assertThat(order.getOrderItems().get(index).getOrderPrice()).isEqualTo(orderItemPrice);
+		Assertions.assertThat(order.getOrderItems().get(index).getOrderQuantity()).isEqualTo(orderItemQuantity);
 	}
 
 	private static class Order {
