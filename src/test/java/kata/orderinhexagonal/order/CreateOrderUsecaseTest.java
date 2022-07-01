@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.MemberFixture;
@@ -16,14 +18,15 @@ import kata.orderinhexagonal.order.application.port.in.OrderItemRequest;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderStatus;
 
+@SpringBootTest
 class CreateOrderUsecaseTest {
 
-	CreateOrderUsecase createOrderUsecase;
-	ItemFixture itemFixture;
+	CreateOrderUsecase createOrderUsecase = new OrderService();
+	@Autowired ItemFixture itemFixture;
 
-	StockFixture stockFixture;
+	@Autowired StockFixture stockFixture;
 
-	MemberFixture memberFixture;
+	@Autowired MemberFixture memberFixture;
 
 	@Test
 	void 상품_주문() {
@@ -77,4 +80,11 @@ class CreateOrderUsecaseTest {
 		Assertions.assertThat(order.getOrderItems().get(index).getOrderQuantity()).isEqualTo(orderItemQuantity);
 	}
 
+	private static class OrderService implements CreateOrderUsecase {
+		@Override
+		public Order createOrder(CreateOrderRequest request) {
+
+			return null;
+		}
+	}
 }
