@@ -60,7 +60,7 @@ class OrderApiTest {
 
 		OrderItemRequest orderItemRequest1 = OrderItemRequest.of(orderItem1.getId(), orderQuantity1);
 		OrderItemRequest orderItemRequest2 = OrderItemRequest.of(orderItem2.getId(), orderQuantity2);
-		CreateOrderRequest orderRequest = CreateOrderRequest.of(List.of(orderItemRequest1, orderItemRequest2));
+		CreateOrderRequest orderRequest = CreateOrderRequest.of(member, List.of(orderItemRequest1, orderItemRequest2));
 
 		// when
 		MockHttpServletResponse response = mockMvc.perform(post("/orders")
