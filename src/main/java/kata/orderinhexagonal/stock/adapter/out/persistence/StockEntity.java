@@ -29,9 +29,12 @@ public class StockEntity {
 	@JoinColumn(name = "item_id")
 	private ItemEntity itemEntity;
 
-	public StockEntity(Integer quantity, ItemEntity itemEntity, Stock.StockType stockType) {
+	public StockEntity(Integer quantity, Stock.StockType stockType) {
 		this.quantity = quantity;
-		this.itemEntity = itemEntity;
 		this.stockType = stockType;
+	}
+
+	public void updateItemEntity(ItemEntity itemEntity) {
+		this.itemEntity = itemEntity;
 	}
 }
