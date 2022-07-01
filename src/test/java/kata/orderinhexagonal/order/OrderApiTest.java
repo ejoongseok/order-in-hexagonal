@@ -20,7 +20,6 @@ import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
-import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderResponse;
 import kata.orderinhexagonal.order.application.port.in.OrderItemRequest;
@@ -50,7 +49,8 @@ class OrderApiTest {
 		String name = "이중석";
 		String email = "ejoongseok@gmail.com";
 		String location = "대전광역시 서구";
-		Member member = memberFixture.createMember(name, email, location);
+		String accessToken = memberFixture.getAccessToken(name, email, location, mockMvc,
+			objectMapper);
 
 		int orderQuantity1 = 1;
 		int orderQuantity2 = 3;
@@ -66,6 +66,7 @@ class OrderApiTest {
 		MockHttpServletResponse response = mockMvc.perform(post("/orders")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(orderRequest))
+			.header("Authorization", accessToken)
 		).andReturn().getResponse();
 
 		// then
