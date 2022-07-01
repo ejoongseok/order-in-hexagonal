@@ -13,5 +13,4 @@ public class CreateOrderResponse {
 	private List<OrderItemResponse> orderItems = new ArrayList<>();
 	private int totalPrice;
 	private OrderStatus status;
-	private Member member;
 }
