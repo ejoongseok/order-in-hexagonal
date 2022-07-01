@@ -60,7 +60,7 @@ class OrderApiTest {
 
 		OrderItemRequest orderItemRequest1 = OrderItemRequest.of(orderItem1.getId(), orderQuantity1);
 		OrderItemRequest orderItemRequest2 = OrderItemRequest.of(orderItem2.getId(), orderQuantity2);
-		CreateOrderRequest orderRequest = CreateOrderRequest.of(member, List.of(orderItemRequest1, orderItemRequest2));
+		CreateOrderRequest orderRequest = CreateOrderRequest.of(List.of(orderItemRequest1, orderItemRequest2));
 
 		// when
 		MockHttpServletResponse response = mockMvc.perform(post("/orders")
@@ -78,7 +78,6 @@ class OrderApiTest {
 		주문상품_가격_주문개수_검증(createOrderResponse, 1, orderItem2, orderItem2TotalPrice);
 		Assertions.assertThat(createOrderResponse.getTotalPrice()).isEqualTo(totalPrice);
 		Assertions.assertThat(createOrderResponse.getStatus()).isEqualTo(OrderStatus.NOT_PAYED);
-		Assertions.assertThat(createOrderResponse.getMember().getName()).isEqualTo(member.getName());
 		상품_남은수량_검증(orderItem1, orderQuantity1, itemFixture.getItem(orderItem1.getId()));
 		상품_남은수량_검증(orderItem2, orderQuantity2, itemFixture.getItem(orderItem2.getId()));
 	}

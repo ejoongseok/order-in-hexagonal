@@ -55,6 +55,7 @@ class CreateOrderUsecaseTest {
 		Assertions.assertThat(order.getStatus()).isEqualTo(OrderStatus.NOT_PAYED);
 		Assertions.assertThat(order.getTotalPrice()).isEqualTo(totalPrice);
 		Assertions.assertThat(order.getOrderItems()).hasSize(2);
+		Assertions.assertThat(order.getMember().getId()).isEqualTo(member.getId());
 		주문상품_검증(order, 0, orderItem1, orderItem1Price, orderItem1Quantity);
 		주문상품_검증(order, 1, orderItem2, orderItem2Price, orderItem2Quantity);
 		상품_남은수량_검증(orderItem1, orderItem1Quantity, itemFixture.getItem(orderItem1.getId()));
