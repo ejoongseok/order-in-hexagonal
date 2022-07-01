@@ -3,9 +3,12 @@ package kata.orderinhexagonal.order.application.port.in;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItemRequest {
 	@NotNull(message = "주문할 상품의 ID가 없습니다.")
 	private Long itemId;
