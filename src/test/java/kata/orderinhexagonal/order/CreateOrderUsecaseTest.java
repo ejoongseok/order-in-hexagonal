@@ -11,6 +11,7 @@ import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
+import kata.orderinhexagonal.order.application.port.in.CreateOrderUsecase;
 import kata.orderinhexagonal.order.application.port.in.OrderItemRequest;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderStatus;
