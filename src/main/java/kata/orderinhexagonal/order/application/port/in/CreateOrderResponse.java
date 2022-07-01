@@ -3,7 +3,6 @@ package kata.orderinhexagonal.order.application.port.in;
 import java.util.ArrayList;
 import java.util.List;
 
-import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.domain.OrderStatus;
 import lombok.Getter;
 
