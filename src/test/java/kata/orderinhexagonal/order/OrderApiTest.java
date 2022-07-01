@@ -74,19 +74,24 @@ class OrderApiTest {
 			CreateOrderResponse.class);
 		Assertions.assertThat(createOrderResponse.getId()).isPositive();
 		Assertions.assertThat(createOrderResponse.getOrderItems()).hasSize(2);
-		Assertions.assertThat(createOrderResponse.getOrderItems().get(0).getQuantity()).isEqualTo(orderItem1.getStockQuantity());
-		Assertions.assertThat(createOrderResponse.getOrderItems().get(0).getItemId()).isEqualTo(orderItem1.getId());
-		Assertions.assertThat(createOrderResponse.getOrderItems().get(0).getPrice()).isEqualTo(orderItem1TotalPrice);
-		Assertions.assertThat(createOrderResponse.getOrderItems().get(1).getQuantity()).isEqualTo(orderItem2.getStockQuantity());
-		Assertions.assertThat(createOrderResponse.getOrderItems().get(1).getItemId()).isEqualTo(orderItem2.getId());
-		Assertions.assertThat(createOrderResponse.getOrderItems().get(1).getPrice()).isEqualTo(orderItem2TotalPrice);
+		주문상품_가격_주문개수_검증(createOrderResponse, 0, orderItem1, orderItem1TotalPrice);
+		주문상품_가격_주문개수_검증(createOrderResponse, 1, orderItem2, orderItem2TotalPrice);
 		Assertions.assertThat(createOrderResponse.getTotalPrice()).isEqualTo(totalPrice);
 		Assertions.assertThat(createOrderResponse.getStatus()).isEqualTo(OrderStatus.NOT_PAYED);
 		Assertions.assertThat(createOrderResponse.getMember().getName()).isEqualTo(member.getName());
-		Item refreshItem1 = itemFixture.getItem(orderItem1.getId());
-		Item refreshItem2 = itemFixture.getItem(orderItem2.getId());
+		상품_남은수량_검증(orderItem1, orderQuantity1, itemFixture.getItem(orderItem1.getId()));
+		상품_남은수량_검증(orderItem2, orderQuantity2, itemFixture.getItem(orderItem2.getId()));
+	}
+
+	private void 상품_남은수량_검증(Item orderItem1, int orderQuantity1, Item refreshItem1) {
 		Assertions.assertThat(refreshItem1.getStockQuantity()).isEqualTo(orderItem1.getStockQuantity() - orderQuantity1);
-		Assertions.assertThat(refreshItem2.getStockQuantity()).isEqualTo(orderItem2.getStockQuantity() - orderQuantity2);
+	}
+
+	private void 주문상품_가격_주문개수_검증(CreateOrderResponse createOrderResponse, int index, Item orderItem,
+		int orderItemTotalPrice) {
+		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getQuantity()).isEqualTo(orderItem.getStockQuantity());
+		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getItemId()).isEqualTo(orderItem.getId());
+		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getPrice()).isEqualTo(orderItemTotalPrice);
 	}
 
 }
