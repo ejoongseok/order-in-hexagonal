@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kata.orderinhexagonal.auth.JwtProvider;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderResponse;
+import kata.orderinhexagonal.order.application.port.in.CreateOrderUsecase;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -23,6 +24,8 @@ public class OrderController {
 
 	private final JwtProvider jwtProvider;
 
+	private final CreateOrderUsecase createOrderUsecase;
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public CreateOrderResponse createOrder(@RequestHeader(value = "Authorization") String authorization, @RequestBody @Valid CreateOrderRequest request, Errors errors) {
@@ -31,6 +34,8 @@ public class OrderController {
 		}
 		Long memberId = jwtProvider.parseToken(authorization.substring(7));
 		request.assignOrdererId(memberId);
+
+		createOrderUsecase.createOrder(request);
 
 		return new CreateOrderResponse();
 	}
