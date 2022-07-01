@@ -10,4 +10,8 @@ public class MemberMapper {
 	public MemberEntity toEntity(Member domain) {
 		return new MemberEntity(domain.getName(), domain.getEmail(), domain.getPassword(), domain.getLocation());
 	}
+
+	public Member toDomain(MemberEntity memberEntity) {
+		return Member.toDomain(memberEntity);
+	}
 }
