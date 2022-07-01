@@ -1,15 +1,24 @@
 package kata.orderinhexagonal.order.application.port.in;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import lombok.Getter;
+
+@Getter
 public class OrderItemRequest {
-	private Long id;
+	@NotNull(message = "주문할 상품의 ID가 없습니다.")
+	private Long itemId;
+	@NotNull(message = "주문할 상품의 개수를 입력해주세요.")
+	@Min(value = 1, message = "주문할 상품의 개수를 1개 이상으로 입력해주세요.")
 	private int orderQuantity;
 
-	public OrderItemRequest(Long id, int orderQuantity) {
-		this.id = id;
+	public OrderItemRequest(Long itemId, int orderQuantity) {
+		this.itemId = itemId;
 		this.orderQuantity = orderQuantity;
 	}
 
-	public static OrderItemRequest of(Long id, int orderQuantity) {
-		return new OrderItemRequest(id, orderQuantity);
+	public static OrderItemRequest of(Long itemId, int orderQuantity) {
+		return new OrderItemRequest(itemId, orderQuantity);
 	}
 }
