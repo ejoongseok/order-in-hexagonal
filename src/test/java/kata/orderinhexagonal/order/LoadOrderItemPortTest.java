@@ -7,12 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.order.application.port.out.LoadOrderItemPort;
 
 @SpringBootTest
 class LoadOrderItemPortTest {
 
 	@Autowired ItemFixture itemFixture;
-	@Autowired LoadOrderItemPort loadOrderItemPort;
+	@Autowired
+	LoadOrderItemPort loadOrderItemPort;
 
 	@Test
 	void loadItemTest() {
