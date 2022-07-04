@@ -1,4 +1,4 @@
-package kata.orderinhexagonal.discount.adapter;
+package kata.orderinhexagonal.discount.adapter.in.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
