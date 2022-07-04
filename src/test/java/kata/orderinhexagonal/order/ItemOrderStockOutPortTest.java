@@ -23,7 +23,7 @@ class ItemOrderStockOutPortTest {
 	ItemOrderStockOutPort itemOrderStockOutPort;
 
 	@Test
-	void 재고_차감() {
+	void 재고_차감() throws InterruptedException {
 		// given
 		Item item = itemFixture.createItem("가방", 100_000);
 		int stockInQuantity = 10;
@@ -33,6 +33,7 @@ class ItemOrderStockOutPortTest {
 		// when
 		itemOrderStockOutPort.stockOut(item, stockOutQuantity);
 		// then
+		Thread.sleep(1000);
 		Item refreshItem = itemFixture.getItem(item.getId());
 		Assertions.assertThat(refreshItem.getId()).isEqualTo(item.getId());
 		Assertions.assertThat(refreshItem.getStockQuantity()).isEqualTo(item.getStockQuantity() - stockOutQuantity);
