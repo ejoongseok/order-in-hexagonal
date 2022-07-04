@@ -16,4 +16,8 @@ public class Discount {
 		this.discountValue = discountRate;
 		this.item = discountItem;
 	}
+
+	public void assignId(Long id) {
+		this.id = id;
+	}
 }
