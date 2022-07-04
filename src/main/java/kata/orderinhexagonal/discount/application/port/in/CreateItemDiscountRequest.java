@@ -1,7 +1,12 @@
 package kata.orderinhexagonal.discount.application.port.in;
 
 import kata.orderinhexagonal.discount.domain.DiscountType;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateItemDiscountRequest {
 	private Long itemId;
 	private DiscountType discountType;
@@ -15,17 +20,5 @@ public class CreateItemDiscountRequest {
 
 	public static CreateItemDiscountRequest of(Long itemId, DiscountType discountType, int discountRate) {
 		return new CreateItemDiscountRequest(itemId, discountType, discountRate);
-	}
-
-	public Long getItemId() {
-		return itemId;
-	}
-
-	public DiscountType getDiscountType() {
-		return discountType;
-	}
-
-	public int getDiscountRate() {
-		return discountRate;
 	}
 }
