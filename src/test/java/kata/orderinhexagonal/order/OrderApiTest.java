@@ -21,8 +21,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
+import kata.orderinhexagonal.fixture.OrderItemFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.order.adapter.out.persistence.OrderItemEntity;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderResponse;
 import kata.orderinhexagonal.order.application.port.in.OrderItemRequest;
@@ -42,11 +44,16 @@ class OrderApiTest {
 	@Autowired MemberFixture memberFixture;
 
 	@Autowired
+	OrderItemFixture orderItemFixture;
+
+	@Autowired
 	OrderFixture orderFixture;
 
 	@BeforeEach
 	void setUp() {
-	    memberFixture.clearMember();
+
+		orderFixture.clearOrder();
+	memberFixture.clearMember();
 	}
 
 	@AfterEach
@@ -60,10 +67,14 @@ class OrderApiTest {
 	@Test
 	void 상품_주문() throws Exception {
 		// given
-		Item orderItem1 = itemFixture.createItem("노트북", 1_000_000);
-		stockFixture.stockIn(orderItem1, 10);
-		Item orderItem2 = itemFixture.createItem("가방", 150_000);
-		stockFixture.stockIn(orderItem2, 10);
+		Item item1 = itemFixture.createItem("노트북", 1_000_000);
+		int stockInQuantity1 = 10;
+		stockFixture.stockIn(item1, stockInQuantity1);
+		item1.stockInQuantity(stockInQuantity1);
+		Item item2 = itemFixture.createItem("가방", 150_000);
+		int stockInQuantity2 = 10;
+		stockFixture.stockIn(item2, stockInQuantity2);
+		item2.stockInQuantity(stockInQuantity2);
 
 		String name = "이중석";
 		String email = "ejoongseok@gmail.com";
@@ -73,12 +84,12 @@ class OrderApiTest {
 
 		int orderQuantity1 = 1;
 		int orderQuantity2 = 3;
-		int orderItem1TotalPrice = orderQuantity1 * orderItem1.getPrice();
-		int orderItem2TotalPrice = orderQuantity2 * orderItem2.getPrice();
+		int orderItem1TotalPrice = orderQuantity1 * item1.getPrice();
+		int orderItem2TotalPrice = orderQuantity2 * item2.getPrice();
 		int totalPrice = orderItem1TotalPrice + orderItem2TotalPrice;
 
-		OrderItemRequest orderItemRequest1 = OrderItemRequest.of(orderItem1.getId(), orderQuantity1);
-		OrderItemRequest orderItemRequest2 = OrderItemRequest.of(orderItem2.getId(), orderQuantity2);
+		OrderItemRequest orderItemRequest1 = OrderItemRequest.of(item1.getId(), orderQuantity1);
+		OrderItemRequest orderItemRequest2 = OrderItemRequest.of(item2.getId(), orderQuantity2);
 		CreateOrderRequest orderRequest = CreateOrderRequest.of(List.of(orderItemRequest1, orderItemRequest2));
 
 		// when
@@ -94,22 +105,23 @@ class OrderApiTest {
 			CreateOrderResponse.class);
 		Assertions.assertThat(createOrderResponse.getId()).isPositive();
 		Assertions.assertThat(createOrderResponse.getOrderItems()).hasSize(2);
-		주문상품_가격_주문개수_검증(createOrderResponse, 0, orderItem1, orderItem1TotalPrice);
-		주문상품_가격_주문개수_검증(createOrderResponse, 1, orderItem2, orderItem2TotalPrice);
+		List<OrderItemEntity> orderItems = orderItemFixture.getOrderItems(createOrderResponse.getId());
+		주문상품_가격_주문개수_검증(createOrderResponse, 0, orderItems, orderItem1TotalPrice);
+		주문상품_가격_주문개수_검증(createOrderResponse, 1, orderItems, orderItem2TotalPrice);
 		Assertions.assertThat(createOrderResponse.getTotalPrice()).isEqualTo(totalPrice);
 		Assertions.assertThat(createOrderResponse.getStatus()).isEqualTo(OrderStatus.NOT_PAYED);
-		상품_남은수량_검증(orderItem1, orderQuantity1, itemFixture.getItem(orderItem1.getId()));
-		상품_남은수량_검증(orderItem2, orderQuantity2, itemFixture.getItem(orderItem2.getId()));
+		상품_남은수량_검증(item1, orderQuantity1, itemFixture.getItem(item1.getId()));
+		상품_남은수량_검증(item2, orderQuantity2, itemFixture.getItem(item2.getId()));
 	}
 
 	private void 상품_남은수량_검증(Item orderItem1, int orderQuantity1, Item refreshItem1) {
 		Assertions.assertThat(refreshItem1.getStockQuantity()).isEqualTo(orderItem1.getStockQuantity() - orderQuantity1);
 	}
 
-	private void 주문상품_가격_주문개수_검증(CreateOrderResponse createOrderResponse, int index, Item orderItem,
+	private void 주문상품_가격_주문개수_검증(CreateOrderResponse createOrderResponse, int index, List<OrderItemEntity> orderItems,
 		int orderItemTotalPrice) {
-		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getQuantity()).isEqualTo(orderItem.getStockQuantity());
-		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getItemId()).isEqualTo(orderItem.getId());
+		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getQuantity()).isEqualTo(orderItems.get(index).getOrderQuantity());
+		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getItemId()).isEqualTo(orderItems.get(index).getId());
 		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getPrice()).isEqualTo(orderItemTotalPrice);
 	}
 

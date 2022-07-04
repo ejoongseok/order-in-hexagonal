@@ -48,7 +48,7 @@ class CreateOrderUsecaseTest {
 
 
 	@Test
-	void 상품_주문() {
+	void 상품_주문() throws InterruptedException {
 		// given
 		Item orderItem1 = itemFixture.createItem("노트북", 1_000_000);
 		int stockInQuantity1 = 10;
@@ -77,6 +77,8 @@ class CreateOrderUsecaseTest {
 
 		// when
 		Order order = createOrderUsecase.createOrder(request);
+
+		Thread.sleep(1000);
 
 		// then
 		Assertions.assertThat(order.getId()).isPositive();

@@ -63,7 +63,7 @@ class SaveOrderPortTest {
 
 
 	@Test
-	void saveOrderTest() {
+	void saveOrderTest() throws InterruptedException {
 		// given
 		Member member = memberFixture.createMember("이중석", "ejoongseok@gmail.com", "대전광역시 서구");
 		Item item1 = itemFixture.createItem("가방", 100_000);
@@ -88,6 +88,8 @@ class SaveOrderPortTest {
 		for (OrderItem orderItem : orderItems) {
 			itemOrderStockOutPort.stockOut(orderItem.getItem(), orderItem.getOrderQuantity());
 		}
+
+		Thread.sleep(1000);
 
 		// when
 		saveOrderPort.save(order);

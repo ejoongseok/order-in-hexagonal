@@ -14,7 +14,9 @@ public class OrderItemFixture {
 	@Autowired
 	OrderItemRepository orderItemRepository;
 
+
 	public List<OrderItemEntity> getOrderItems(Long id) {
 		return orderItemRepository.findByOrderId(id);
 	}
+
 }
