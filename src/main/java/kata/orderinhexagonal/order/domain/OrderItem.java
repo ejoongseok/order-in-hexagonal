@@ -35,4 +35,8 @@ public class OrderItem {
 	public int getOrderQuantity() {
 		return orderQuantity;
 	}
+
+	public void assignId(Long id) {
+		this.id = id;
+	}
 }
