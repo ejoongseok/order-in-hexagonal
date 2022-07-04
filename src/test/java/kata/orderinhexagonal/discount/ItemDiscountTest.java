@@ -14,6 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kata.orderinhexagonal.discount.application.port.in.CreateItemDiscountRequest;
+import kata.orderinhexagonal.discount.application.port.in.CreateItemDiscountResponse;
+import kata.orderinhexagonal.discount.domain.DiscountType;
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
 
@@ -47,55 +50,5 @@ class ItemDiscountTest {
 		Assertions.assertThat(createItemDiscountResponse.getId()).isPositive();
 		Assertions.assertThat(createItemDiscountResponse.getDiscountType()).isEqualTo(DiscountType.RATE);
 		Assertions.assertThat(createItemDiscountResponse.getDiscountRate()).isEqualTo(discountRate);
-	}
-
-	private static class CreateItemDiscountRequest {
-		private Long itemId;
-		private DiscountType discountType;
-		private int discountRate;
-
-		public CreateItemDiscountRequest(Long itemId, DiscountType discountType, int discountRate) {
-			this.itemId = itemId;
-			this.discountType = discountType;
-			this.discountRate = discountRate;
-		}
-
-		public static CreateItemDiscountRequest of(Long itemId, DiscountType discountType, int discountRate) {
-			return new CreateItemDiscountRequest(itemId, discountType, discountRate);
-		}
-
-		public Long getItemId() {
-			return itemId;
-		}
-
-		public DiscountType getDiscountType() {
-			return discountType;
-		}
-
-		public int getDiscountRate() {
-			return discountRate;
-		}
-	}
-
-	public enum DiscountType {
-		RATE
-	}
-
-	private static class CreateItemDiscountResponse {
-		private Long id;
-		private DiscountType discountType;
-		private int discountRate;
-
-		public Long getId() {
-			return id;
-		}
-
-		public DiscountType getDiscountType() {
-			return discountType;
-		}
-
-		public int getDiscountRate() {
-			return discountRate;
-		}
 	}
 }
