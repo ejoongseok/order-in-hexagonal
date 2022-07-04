@@ -2,17 +2,9 @@ package kata.orderinhexagonal.auth;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import kata.orderinhexagonal.fixture.MemberFixture;
-
-@SpringBootTest
 class JwtAuthTest {
-
-
-	@Autowired
-	MemberFixture memberFixture;
 	JwtProvider jwtProvider = new JwtProvider();
 
 	@Test
