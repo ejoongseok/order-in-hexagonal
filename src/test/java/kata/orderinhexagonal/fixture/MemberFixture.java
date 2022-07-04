@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kata.orderinhexagonal.member.adapter.out.persistence.MemberEntity;
 import kata.orderinhexagonal.member.adapter.out.persistence.MemberSpringDataJpaRepository;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
@@ -38,5 +39,9 @@ public class MemberFixture {
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(request))
 		).andReturn().getResponse().getHeader("Authorization");
+	}
+
+	public MemberEntity getMember(long id) {
+		return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Member not found"));
 	}
 }
