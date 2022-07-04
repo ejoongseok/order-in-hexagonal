@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class MemberEntity {
 	@Id
 	@GeneratedValue
+	@Column(name = "member_id")
 	private long id;
 	@Column(nullable = false)
 	private String name;
@@ -25,7 +26,8 @@ public class MemberEntity {
 	@Column(nullable = false)
 	private String location;
 
-	public MemberEntity(String name, String email, String password, String location) {
+	public MemberEntity(long id, String name, String email, String password, String location) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
