@@ -11,6 +11,7 @@ import kata.orderinhexagonal.order.application.port.in.CreateOrderUsecase;
 import kata.orderinhexagonal.order.application.port.out.ItemOrderStockOutPort;
 import kata.orderinhexagonal.order.application.port.out.LoadOrderItemPort;
 import kata.orderinhexagonal.order.application.port.out.LoadOrdererPort;
+import kata.orderinhexagonal.order.application.port.out.SaveOrderPort;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderItem;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,8 @@ public class OrderService implements CreateOrderUsecase {
 	private final LoadOrdererPort loadOrdererPort;
 	private final LoadOrderItemPort loadOrderItemPort;
 	private final ItemOrderStockOutPort itemOrderStockOutPort;
+
+	private final SaveOrderPort saveOrderPort;
 
 	@Override
 	public Order createOrder(CreateOrderRequest request) {
@@ -35,6 +38,7 @@ public class OrderService implements CreateOrderUsecase {
 		for (OrderItem orderItem : orderItems) {
 			itemOrderStockOutPort.stockOut(orderItem.getItem(), orderItem.getOrderQuantity());
 		}
-		return null;
+		saveOrderPort.save(order);
+		return order;
 	}
 }
