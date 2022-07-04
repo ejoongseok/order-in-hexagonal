@@ -1,4 +1,4 @@
-package kata.orderinhexagonal.discount.adapter.out.persistence;
+package kata.orderinhexagonal.discount.application.port.out;
 
 public interface CreateDiscountPolicyValidator {
 	boolean existsDiscountItemCheck(Long id);

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import kata.orderinhexagonal.discount.adapter.out.persistence.CreateDiscountPolicyValidator;
+import kata.orderinhexagonal.discount.application.port.out.CreateDiscountPolicyValidator;
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
 
