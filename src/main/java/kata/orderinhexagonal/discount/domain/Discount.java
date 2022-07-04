@@ -1,7 +1,9 @@
 package kata.orderinhexagonal.discount.domain;
 
 import kata.orderinhexagonal.item.domain.Item;
+import lombok.Getter;
 
+@Getter
 public class Discount {
 
 	private Long id;
@@ -13,21 +15,5 @@ public class Discount {
 		this.discountType = discountType;
 		this.discountValue = discountRate;
 		this.item = discountItem;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public DiscountType getDiscountType() {
-		return discountType;
-	}
-
-	public Item getItem() {
-		return item;
-	}
-
-	public int getDiscountValue() {
-		return discountValue;
 	}
 }
