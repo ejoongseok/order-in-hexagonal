@@ -26,7 +26,9 @@ class ItemOrderStockOutPortTest {
 	void 재고_차감() {
 		// given
 		Item item = itemFixture.createItem("가방", 100_000);
-		stockFixture.stockIn(item, 10);
+		int stockInQuantity = 10;
+		stockFixture.stockIn(item, stockInQuantity);
+		item.stockInQuantity(stockInQuantity);
 		int stockOutQuantity = 3;
 		// when
 		itemOrderStockOutPort.stockOut(item, stockOutQuantity);
