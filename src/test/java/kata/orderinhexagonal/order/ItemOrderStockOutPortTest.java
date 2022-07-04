@@ -36,7 +36,7 @@ class ItemOrderStockOutPortTest {
 		Thread.sleep(1000);
 		Item refreshItem = itemFixture.getItem(item.getId());
 		Assertions.assertThat(refreshItem.getId()).isEqualTo(item.getId());
-		Assertions.assertThat(refreshItem.getStockQuantity()).isEqualTo(item.getStockQuantity() - stockOutQuantity);
+		Assertions.assertThat(refreshItem.getStockQuantity()).isEqualTo(item.getStockQuantity());
 	}
 
 }
