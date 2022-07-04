@@ -2,19 +2,21 @@ package kata.orderinhexagonal.discount;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.discount.application.port.in.CreateItemDiscountRequest;
 import kata.orderinhexagonal.discount.application.port.in.CreateItemDiscountUsecase;
-import kata.orderinhexagonal.discount.application.service.DiscountService;
 import kata.orderinhexagonal.discount.domain.Discount;
 import kata.orderinhexagonal.discount.domain.DiscountType;
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.item.domain.Item;
 
+@SpringBootTest
 class CreateItemDiscountUsecaseTest {
 
-	CreateItemDiscountUsecase createItemDiscountUsecase = new DiscountService();
-	ItemFixture itemFixture;
+	@Autowired CreateItemDiscountUsecase createItemDiscountUsecase;
+	@Autowired ItemFixture itemFixture;
 
 	@Test
 	void createItemDiscountRateTest() {
