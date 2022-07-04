@@ -15,6 +15,7 @@ import kata.orderinhexagonal.auth.JwtProvider;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderResponse;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderUsecase;
+import kata.orderinhexagonal.order.domain.Order;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -35,8 +36,8 @@ public class OrderController {
 		Long memberId = jwtProvider.parseToken(authorization.substring(7));
 		request.assignOrdererId(memberId);
 
-		createOrderUsecase.createOrder(request);
+		Order order = createOrderUsecase.createOrder(request);
 
-		return new CreateOrderResponse();
+		return new CreateOrderResponse(order);
 	}
 }
