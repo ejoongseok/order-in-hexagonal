@@ -3,6 +3,7 @@ package kata.orderinhexagonal.stock.adapter.out.persistence;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,11 +26,12 @@ public class StockEntity {
 	private Integer quantity;
 	@Enumerated(EnumType.STRING)
 	private Stock.StockType stockType;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")
 	private ItemEntity itemEntity;
 
-	public StockEntity(Integer quantity, Stock.StockType stockType) {
+	public StockEntity(Long id, Integer quantity, Stock.StockType stockType) {
+		this.id = id;
 		this.quantity = quantity;
 		this.stockType = stockType;
 	}
