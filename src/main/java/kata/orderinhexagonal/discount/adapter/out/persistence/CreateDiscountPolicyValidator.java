@@ -1,5 +1,5 @@
 package kata.orderinhexagonal.discount.adapter.out.persistence;
 
 public interface CreateDiscountPolicyValidator {
-	void existsDiscountItemCheck(Long id);
+	boolean existsDiscountItemCheck(Long id);
 }
