@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.order.application.port.out.ItemOrderStockOutPort;
 
 @SpringBootTest
 class ItemOrderStockOutPortTest {
@@ -18,7 +19,8 @@ class ItemOrderStockOutPortTest {
 	@Autowired
 	StockFixture stockFixture;
 
-	@Autowired ItemOrderStockOutPort itemOrderStockOutPort;
+	@Autowired
+	ItemOrderStockOutPort itemOrderStockOutPort;
 
 	@Test
 	void 재고_차감() {
