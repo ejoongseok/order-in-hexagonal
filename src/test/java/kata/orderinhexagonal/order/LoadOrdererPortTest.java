@@ -1,6 +1,7 @@
 package kata.orderinhexagonal.order;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,12 @@ class LoadOrdererPortTest {
 	MemberFixture memberFixture;
 	@Autowired
 	LoadOrdererPort loadOrdererPort;
+
+	@BeforeEach
+	void setUp() {
+	    memberFixture.clearMember();
+	}
+
 
 	@Test
 	void loadOrdererTest() {

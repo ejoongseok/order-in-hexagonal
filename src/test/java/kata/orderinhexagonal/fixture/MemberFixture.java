@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kata.orderinhexagonal.member.adapter.out.persistence.MemberSpringDataJpaRepository;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberRequest;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberUsecase;
 import kata.orderinhexagonal.member.domain.Member;
@@ -17,6 +18,12 @@ import kata.orderinhexagonal.member.domain.Member;
 public class MemberFixture {
 	@Autowired CreateMemberUsecase createMemberUsecase;
 
+	@Autowired
+	MemberSpringDataJpaRepository repository;
+
+	public void clearMember() {
+		repository.deleteAll();
+	}
 	public Member createMember(String name, String email, String location) {
 		CreateMemberRequest request = new CreateMemberRequest(name, "ejoongseok1234!", email, location);
 		Member member = createMemberUsecase.join(request);
