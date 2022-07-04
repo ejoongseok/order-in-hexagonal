@@ -1,6 +1,7 @@
 package kata.orderinhexagonal.member;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,11 @@ class MemberJoinValidatorTest {
 	@BeforeEach
 	void setUp() {
 	    memberRepository.deleteAll();
+	}
+
+	@AfterEach
+	void tearDown() {
+		memberRepository.deleteAll();
 	}
 
 

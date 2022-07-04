@@ -5,6 +5,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.MemberFixture;
+import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
@@ -37,6 +40,22 @@ class OrderApiTest {
 	@Autowired StockFixture stockFixture;
 
 	@Autowired MemberFixture memberFixture;
+
+	@Autowired
+	OrderFixture orderFixture;
+
+	@BeforeEach
+	void setUp() {
+	    memberFixture.clearMember();
+	}
+
+	@AfterEach
+	void tearDown() {
+		orderFixture.clearOrder();
+		memberFixture.clearMember();
+	}
+
+
 
 	@Test
 	void 상품_주문() throws Exception {
