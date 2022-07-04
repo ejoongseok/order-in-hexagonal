@@ -40,4 +40,8 @@ public class Order {
 	public void addOrderItem(Item item, int orderQuantity, int orderPrice) {
 		orderItems.add(new OrderItem(this,item, orderQuantity, orderPrice));
 	}
+
+	public void assignId(Long id) {
+		this.id = id;
+	}
 }
