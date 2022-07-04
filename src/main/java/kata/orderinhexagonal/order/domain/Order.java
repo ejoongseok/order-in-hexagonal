@@ -11,6 +11,11 @@ public class Order {
 	private List<OrderItem> orderItems = new ArrayList<>();
 	private Member member;
 
+	public Order(Member orderer) {
+		this.member = orderer;
+		this.status = OrderStatus.NOT_PAYED;
+	}
+
 	public int getTotalPrice() {
 		return orderItems.stream().mapToInt(OrderItem::getOrderPrice).sum();
 	}
