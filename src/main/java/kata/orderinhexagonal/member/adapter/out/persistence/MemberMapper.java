@@ -8,7 +8,7 @@ import kata.orderinhexagonal.member.domain.Member;
 public class MemberMapper {
 
 	public MemberEntity toEntity(Member domain) {
-		return new MemberEntity(domain.getName(), domain.getEmail(), domain.getPassword(), domain.getLocation());
+		return new MemberEntity(domain.getId(), domain.getName(), domain.getEmail(), domain.getPassword(), domain.getLocation());
 	}
 
 	public Member toDomain(MemberEntity memberEntity) {
