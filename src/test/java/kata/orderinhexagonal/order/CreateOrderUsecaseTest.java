@@ -3,12 +3,15 @@ package kata.orderinhexagonal.order;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.fixture.ItemFixture;
 import kata.orderinhexagonal.fixture.MemberFixture;
+import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.member.domain.Member;
@@ -27,14 +30,34 @@ class CreateOrderUsecaseTest {
 	@Autowired StockFixture stockFixture;
 
 	@Autowired MemberFixture memberFixture;
+	@Autowired
+	OrderFixture orderFixture;
+
+	@BeforeEach
+	void setUp() {
+		orderFixture.clearOrder();
+	    memberFixture.clearMember();
+	}
+
+	@AfterEach
+	void tearDown() {
+		orderFixture.clearOrder();
+		memberFixture.clearMember();
+	}
+
+
 
 	@Test
 	void 상품_주문() {
 		// given
 		Item orderItem1 = itemFixture.createItem("노트북", 1_000_000);
-		stockFixture.stockIn(orderItem1, 10);
+		int stockInQuantity1 = 10;
+		stockFixture.stockIn(orderItem1, stockInQuantity1);
+		orderItem1.stockInQuantity(stockInQuantity1);
 		Item orderItem2 = itemFixture.createItem("가방", 150_000);
-		stockFixture.stockIn(orderItem2, 10);
+		int stockInQuantity2 = 10;
+		stockFixture.stockIn(orderItem2, stockInQuantity2);
+		orderItem2.stockInQuantity(stockInQuantity2);
 
 		String name = "이중석";
 		String email = "ejoongseok@gmail.com";
