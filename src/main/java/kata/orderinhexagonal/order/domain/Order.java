@@ -3,6 +3,7 @@ package kata.orderinhexagonal.order.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.member.domain.Member;
 
 public class Order {
@@ -34,5 +35,9 @@ public class Order {
 
 	public Member getMember() {
 		return member;
+	}
+
+	public void addOrderItem(Item item, int orderQuantity, int orderPrice) {
+		orderItems.add(new OrderItem(this,item, orderQuantity, orderPrice));
 	}
 }

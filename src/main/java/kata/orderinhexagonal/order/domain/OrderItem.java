@@ -9,6 +9,13 @@ public class OrderItem {
 	private int orderPrice;
 	private int orderQuantity;
 
+	public OrderItem(Order order, Item item, int orderQuantity, int orderPrice) {
+		this.order = order;
+		this.item = item;
+		this.orderQuantity = orderQuantity;
+		this.orderPrice = orderPrice;
+	}
+
 	public Long getId() {
 		return id;
 	}
