@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class CreateOrderAdapter implements SaveOrderPort {
+public class PersistenceOrderAdapter implements SaveOrderPort {
 
 	private final OrderRepository orderRepository;
 
