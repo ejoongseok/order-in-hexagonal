@@ -31,7 +31,7 @@ public class OrderService implements CreateOrderUsecase {
 		Order order = new Order(orderer);
 		request.getOrderItemRequests().forEach(orderItemRequest -> {
 			Item item = loadOrderItemPort.loadItem(orderItemRequest.getItemId());
-			int orderPrice = item.getPrice() * orderItemRequest.getOrderQuantity();
+			int orderPrice = order.calculatePrice(orderItemRequest.getOrderQuantity(), item.getPrice(), item.getDiscount());
 			order.addOrderItem(item, orderItemRequest.getOrderQuantity(), orderPrice);
 		});
 		List<OrderItem> orderItems = order.getOrderItems();
