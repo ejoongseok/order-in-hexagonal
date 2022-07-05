@@ -69,6 +69,9 @@ class OrderApiTest {
 		// when
 
 		// then
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		Assertions.assertThat(cancleOrderResponse.getId()).isEqualTo(order.getId());
+		Assertions.assertThat(refreshOrder.getOrderStatus()).isEqualTo(OrderStatus.CANCELED);
 	}
 
 
