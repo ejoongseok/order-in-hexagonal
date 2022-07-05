@@ -1,8 +1,10 @@
 package kata.orderinhexagonal.order.application.port.in;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CancelOrderRequest {
 	private Long orderId;
@@ -17,9 +19,6 @@ public class CancelOrderRequest {
 		return new CancelOrderRequest(orderId);
 	}
 
-	public Long getOrderId() {
-		return orderId;
-	}
 
 	public void assignOrdererId(long ordererId) {
 		this.ordererId = ordererId;
