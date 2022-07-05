@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 
 import kata.orderinhexagonal.discount.domain.DiscountType;
 import kata.orderinhexagonal.item.adapter.out.persistence.ItemEntity;
+import kata.orderinhexagonal.item.domain.Item;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,14 +30,14 @@ public class DiscountEntity {
 
 	@OneToOne(fetch = javax.persistence.FetchType.LAZY)
 	@JoinColumn(name = "item_id")
-	private ItemEntity itemEntity;
+	private ItemEntity item;
 
 	private int discountValue;
 
-	public DiscountEntity(Long id, DiscountType discountType, ItemEntity toEntity, int discountValue) {
+	public DiscountEntity(Long id, DiscountType discountType, Item item, int discountValue) {
 		this.id = id;
 		this.discountType = discountType;
-		this.itemEntity = toEntity;
+		this.item = new ItemEntity(item.getId(), item.getName(), item.getPrice(), item.getStockQuantity(), this);
 		this.discountValue = discountValue;
 	}
 }
