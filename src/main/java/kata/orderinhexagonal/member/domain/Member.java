@@ -1,9 +1,11 @@
 package kata.orderinhexagonal.member.domain;
 
 import kata.orderinhexagonal.member.adapter.out.persistence.MemberEntity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(of = "id")
 public class Member {
 	private long id;
 	private String name;
