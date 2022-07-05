@@ -48,6 +48,7 @@ class ItemDiscountTest {
 		CreateItemDiscountResponse createItemDiscountResponse = objectMapper.readValue(response.getContentAsString(),
 			CreateItemDiscountResponse.class);
 		Assertions.assertThat(createItemDiscountResponse.getId()).isPositive();
+		Assertions.assertThat(createItemDiscountResponse.getItemId()).isEqualTo(item.getId());
 		Assertions.assertThat(createItemDiscountResponse.getDiscountType()).isEqualTo(DiscountType.RATE);
 		Assertions.assertThat(createItemDiscountResponse.getDiscountRate()).isEqualTo(discountRate);
 	}
