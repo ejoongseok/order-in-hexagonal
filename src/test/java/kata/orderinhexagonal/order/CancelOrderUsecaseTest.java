@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.member.domain.Member;
+import kata.orderinhexagonal.order.adapter.in.web.OrderController;
 import kata.orderinhexagonal.order.application.port.in.CancelOrderRequest;
+import kata.orderinhexagonal.order.application.port.in.CancelOrderUsecase;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderStatus;
 
@@ -19,6 +21,9 @@ class CancelOrderUsecaseTest {
 	OrderFixture orderFixture;
 	@Autowired
 	MemberFixture memberFixture;
+
+	@Autowired
+	CancelOrderUsecase cancelOrderUsecase;
 
 	@Test
 	void 주문_취소() {
