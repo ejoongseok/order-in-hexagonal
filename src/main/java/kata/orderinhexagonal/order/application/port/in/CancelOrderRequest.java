@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 public class CancelOrderRequest {
 	private Long orderId;
 
+	private Long ordererId;
+
 	public CancelOrderRequest(Long orderId) {
 		this.orderId = orderId;
 	}
@@ -17,5 +19,9 @@ public class CancelOrderRequest {
 
 	public Long getOrderId() {
 		return orderId;
+	}
+
+	public void assignOrdererId(long ordererId) {
+		this.ordererId = ordererId;
 	}
 }
