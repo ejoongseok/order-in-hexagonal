@@ -62,6 +62,16 @@ class OrderApiTest {
 		memberFixture.clearMember();
 	}
 
+	@Test
+	void 주문_취소() {
+		// given
+
+		// when
+
+		// then
+	}
+
+
 
 
 	@Test
