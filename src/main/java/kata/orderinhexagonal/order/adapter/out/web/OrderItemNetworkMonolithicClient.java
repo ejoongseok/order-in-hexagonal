@@ -18,7 +18,7 @@ public class OrderItemNetworkMonolithicClient implements OrderItemNetworkClient 
 
 	@Override
 	public Item getOrderItem(Long id) {
-		ItemEntity itemEntity = itemRepository.findById(id)
+		ItemEntity itemEntity = itemRepository.findItemAndDiscountFetchById(id)
 			.orElseThrow(() -> new RuntimeException("Item not found"));
 
 		return itemMapper.toDomain(itemEntity);
