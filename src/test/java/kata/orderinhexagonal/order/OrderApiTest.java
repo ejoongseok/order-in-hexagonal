@@ -27,6 +27,8 @@ import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.member.application.port.in.CreateMemberResponse;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderItemEntity;
+import kata.orderinhexagonal.order.application.port.in.CancelOrderRequest;
+import kata.orderinhexagonal.order.application.port.in.CancelOrderResponse;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderResponse;
 import kata.orderinhexagonal.order.application.port.in.OrderItemRequest;
@@ -158,27 +160,4 @@ class OrderApiTest {
 		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getPrice()).isEqualTo(orderItemTotalPrice);
 	}
 
-	private static class CancelOrderRequest {
-		private Long orderId;
-
-		public CancelOrderRequest(Long orderId) {
-			this.orderId = orderId;
-		}
-
-		public static CancelOrderRequest of(Long orderId) {
-			return new CancelOrderRequest(orderId);
-		}
-
-		public Long getOrderId() {
-			return orderId;
-		}
-	}
-
-	private static class CancelOrderResponse {
-		private Long orderId;
-
-		public Long getOrderId() {
-			return orderId;
-		}
-	}
 }
