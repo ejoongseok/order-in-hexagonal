@@ -9,6 +9,7 @@ import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.member.domain.Member;
+import kata.orderinhexagonal.order.application.port.out.LoadOrderPort;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderItem;
 
