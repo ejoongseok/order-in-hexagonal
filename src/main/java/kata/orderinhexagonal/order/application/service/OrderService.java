@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.member.domain.Member;
+import kata.orderinhexagonal.order.application.port.in.CancelOrderRequest;
+import kata.orderinhexagonal.order.application.port.in.CancelOrderUsecase;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderUsecase;
 import kata.orderinhexagonal.order.application.port.out.ItemOrderStockOutPort;
@@ -18,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class OrderService implements CreateOrderUsecase {
+public class OrderService implements CreateOrderUsecase, CancelOrderUsecase {
 	private final LoadOrdererPort loadOrdererPort;
 	private final LoadOrderItemPort loadOrderItemPort;
 	private final ItemOrderStockOutPort itemOrderStockOutPort;
@@ -40,5 +42,10 @@ public class OrderService implements CreateOrderUsecase {
 		}
 		saveOrderPort.save(order);
 		return order;
+	}
+
+	@Override
+	public Order cancelOrder(CancelOrderRequest request) {
+		return null;
 	}
 }
