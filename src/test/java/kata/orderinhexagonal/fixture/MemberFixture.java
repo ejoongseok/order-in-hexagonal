@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,14 +32,14 @@ public class MemberFixture {
 		return member;
 	}
 
-	public String getAccessToken(String name, String email, String location, MockMvc mockMvc, ObjectMapper objectMapper) throws
+	public MockHttpServletResponse getAccessToken(String name, String email, String location, MockMvc mockMvc, ObjectMapper objectMapper) throws
 		Exception {
 		String password = "ejoongseok1234!";
 		CreateMemberRequest request = new CreateMemberRequest(email, password, name, location);
 		return mockMvc.perform(post("/members")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(request))
-		).andReturn().getResponse().getHeader("Authorization");
+		).andReturn().getResponse();
 	}
 
 	public MemberEntity getMember(long id) {
