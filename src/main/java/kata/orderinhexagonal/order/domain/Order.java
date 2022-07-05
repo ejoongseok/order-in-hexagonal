@@ -18,6 +18,12 @@ public class Order {
 		this.status = OrderStatus.NOT_PAYED;
 	}
 
+	public Order(Long id, Member member, OrderStatus status) {
+		this.id = id;
+		this.member = member;
+		this.status = status;
+	}
+
 	public int getTotalPrice() {
 		return orderItems.stream().mapToInt(OrderItem::getOrderPrice).sum();
 	}
