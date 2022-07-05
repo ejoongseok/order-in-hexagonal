@@ -24,10 +24,11 @@ class LoadOrderPortTest {
 	LoadOrderPort loadOrderPort;
 
 	@Test
-	void 주문정보_불러오기() {
+	void 주문정보_불러오기() throws InterruptedException {
 		// given
 		Member orderer = memberFixture.createMember("이중석", "ejoongseok@gmail.com", "대전광역시 서구");
 		Order createOrder = orderFixture.createOrder(orderer.getId());
+		Thread.sleep(1000);
 		// when
 		Order loadOrder = loadOrderPort.loadOrder(createOrder.getId());
 		// then
