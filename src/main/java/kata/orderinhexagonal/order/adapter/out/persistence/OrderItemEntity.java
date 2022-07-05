@@ -31,10 +31,10 @@ public class OrderItemEntity {
 	@JoinColumn(name = "order_id")
 	private OrderEntity order;
 
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private Integer orderPrice;
 
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private Integer orderQuantity;
 
 	public OrderItemEntity(int orderQuantity, int orderPrice, ItemEntity itemEntity) {
