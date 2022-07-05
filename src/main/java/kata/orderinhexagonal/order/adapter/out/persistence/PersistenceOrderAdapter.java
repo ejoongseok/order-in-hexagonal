@@ -3,6 +3,7 @@ package kata.orderinhexagonal.order.adapter.out.persistence;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import kata.orderinhexagonal.order.application.port.out.LoadOrderPort;
 import kata.orderinhexagonal.order.application.port.out.SaveOrderPort;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderItem;
@@ -10,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class PersistenceOrderAdapter implements SaveOrderPort {
+public class PersistenceOrderAdapter implements SaveOrderPort, LoadOrderPort {
 
 	private final OrderRepository orderRepository;
 
@@ -27,5 +28,10 @@ public class PersistenceOrderAdapter implements SaveOrderPort {
 			OrderItem orderItem = order.getOrderItems().get(i);
 			orderItem.assignId(orderItemEntity.getId());
 		}
+	}
+
+	@Override
+	public Order loadOrder(Long id) {
+		return null;
 	}
 }
