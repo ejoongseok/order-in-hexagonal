@@ -30,4 +30,8 @@ public class OrderMapper {
 		}
 		return orderEntity;
 	}
+
+	public Order toDomain(OrderEntity entity) {
+		return new Order(entity.getId(), memberMapper.toDomain(entity.getMember()), entity.getStatus());
+	}
 }
