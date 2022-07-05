@@ -9,6 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateItemDiscountResponse {
 	private Long id;
+	private Long itemId;
 	private DiscountType discountType;
 	private int discountRate;
+
+	public CreateItemDiscountResponse(Long id, Long itemId, DiscountType discountType, int discountValue) {
+		this.id = id;
+		this.itemId = itemId;
+		this.discountType = discountType;
+		this.discountRate = discountValue;
+	}
 }
