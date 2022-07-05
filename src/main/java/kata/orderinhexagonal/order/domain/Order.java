@@ -3,6 +3,7 @@ package kata.orderinhexagonal.order.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import kata.orderinhexagonal.discount.domain.Discount;
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.member.domain.Member;
 
@@ -43,5 +44,12 @@ public class Order {
 
 	public void assignId(Long id) {
 		this.id = id;
+	}
+	public int calculatePrice(int orderItemQuantity, int price, Discount discount) {
+		int orderPrice = price * orderItemQuantity;
+		if(discount != null) {
+			return discount.discountPrice(orderPrice);
+		}
+		return orderPrice;
 	}
 }
