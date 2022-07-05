@@ -24,10 +24,13 @@ import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.fixture.OrderItemFixture;
 import kata.orderinhexagonal.fixture.StockFixture;
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.member.application.port.in.CreateMemberResponse;
+import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderItemEntity;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderResponse;
 import kata.orderinhexagonal.order.application.port.in.OrderItemRequest;
+import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderStatus;
 
 @SpringBootTest
@@ -51,9 +54,8 @@ class OrderApiTest {
 
 	@BeforeEach
 	void setUp() {
-
 		orderFixture.clearOrder();
-	memberFixture.clearMember();
+		memberFixture.clearMember();
 	}
 
 	@AfterEach
@@ -63,15 +65,27 @@ class OrderApiTest {
 	}
 
 	@Test
-	void 주문_취소() {
+	void 주문_취소() throws Exception {
 		// given
+		MockHttpServletResponse createMemberAndGetAccessToken = craeteMemberAndGetAccessToken();
+		CreateMemberResponse createMemberResponse = objectMapper.readValue(createMemberAndGetAccessToken.getContentAsString(),
+			CreateMemberResponse.class);
+		Order order = orderFixture.createOrder(createMemberResponse.getId());
+		CancelOrderRequest request = CancelOrderRequest.of(order.getId());
 
 		// when
+		MockHttpServletResponse response = mockMvc.perform(delete("/orders")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(objectMapper.writeValueAsString(request))
+			.header("Authorization", createMemberAndGetAccessToken.getHeader("Authorization"))
+		).andReturn().getResponse();
 
 		// then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		Assertions.assertThat(cancleOrderResponse.getId()).isEqualTo(order.getId());
-		Assertions.assertThat(refreshOrder.getOrderStatus()).isEqualTo(OrderStatus.CANCELED);
+		CancelOrderResponse cancelOrderResponse = objectMapper.readValue(response.getContentAsString(), CancelOrderResponse.class);
+		Assertions.assertThat(cancelOrderResponse.getOrderId()).isEqualTo(order.getId());
+		OrderEntity orderEntity = orderFixture.getOrderEntity(order.getId());
+		Assertions.assertThat(orderEntity.getStatus()).isEqualTo(OrderStatus.CANCELED);
 	}
 
 
@@ -89,11 +103,8 @@ class OrderApiTest {
 		stockFixture.stockIn(item2, stockInQuantity2);
 		item2.stockInQuantity(stockInQuantity2);
 
-		String name = "이중석";
-		String email = "ejoongseok@gmail.com";
-		String location = "대전광역시 서구";
-		String accessToken = memberFixture.getAccessToken(name, email, location, mockMvc,
-			objectMapper);
+		MockHttpServletResponse createMemberResponse = craeteMemberAndGetAccessToken();
+		String accessToken = createMemberResponse.getHeader("Authorization");
 
 		int orderQuantity1 = 1;
 		int orderQuantity2 = 3;
@@ -127,6 +138,15 @@ class OrderApiTest {
 		상품_남은수량_검증(item2, orderQuantity2, itemFixture.getItem(item2.getId()));
 	}
 
+	private MockHttpServletResponse craeteMemberAndGetAccessToken() throws Exception {
+		String name = "이중석";
+		String email = "ejoongseok@gmail.com";
+		String location = "대전광역시 서구";
+		MockHttpServletResponse response = memberFixture.getAccessToken(name, email, location, mockMvc,
+			objectMapper);
+		return response;
+	}
+
 	private void 상품_남은수량_검증(Item orderItem1, int orderQuantity1, Item refreshItem1) {
 		Assertions.assertThat(refreshItem1.getStockQuantity()).isEqualTo(orderItem1.getStockQuantity() - orderQuantity1);
 	}
@@ -138,4 +158,27 @@ class OrderApiTest {
 		Assertions.assertThat(createOrderResponse.getOrderItems().get(index).getPrice()).isEqualTo(orderItemTotalPrice);
 	}
 
+	private static class CancelOrderRequest {
+		private Long orderId;
+
+		public CancelOrderRequest(Long orderId) {
+			this.orderId = orderId;
+		}
+
+		public static CancelOrderRequest of(Long orderId) {
+			return new CancelOrderRequest(orderId);
+		}
+
+		public Long getOrderId() {
+			return orderId;
+		}
+	}
+
+	private static class CancelOrderResponse {
+		private Long orderId;
+
+		public Long getOrderId() {
+			return orderId;
+		}
+	}
 }
