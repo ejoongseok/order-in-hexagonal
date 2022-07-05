@@ -31,6 +31,7 @@ class CancelOrderUsecaseTest {
 		Member orderer = memberFixture.createMember("이중석", "ejoongseok@gmail.com", "대전광역시 서구");
 		Order createOrder = orderFixture.createOrder(orderer.getId());
 		CancelOrderRequest request = CancelOrderRequest.of(createOrder.getId());
+		request.assignOrdererId(orderer.getId());
 		// when
 		Order cancelOrder = cancelOrderUsecase.cancelOrder(request);
 		// then
