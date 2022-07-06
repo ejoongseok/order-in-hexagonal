@@ -11,6 +11,7 @@ import kata.orderinhexagonal.order.application.port.in.CancelOrderUsecase;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderUsecase;
 import kata.orderinhexagonal.order.application.port.out.CancelOrderPort;
+import kata.orderinhexagonal.order.application.port.out.CancelPaymentPort;
 import kata.orderinhexagonal.order.application.port.out.CancelStockOutItemPort;
 import kata.orderinhexagonal.order.application.port.out.ItemOrderStockOutPort;
 import kata.orderinhexagonal.order.application.port.out.LoadOrderItemPort;
@@ -31,6 +32,7 @@ public class OrderService implements CreateOrderUsecase, CancelOrderUsecase {
 	private final LoadOrderPort loadOrderPort;
 	private final CancelStockOutItemPort cancelStockOutItemPort;
 	private final CancelOrderPort cancelOrderPort;
+	private final CancelPaymentPort cancelPaymentPort;
 
 	@Override
 	public Order createOrder(CreateOrderRequest request) {
@@ -45,7 +47,6 @@ public class OrderService implements CreateOrderUsecase, CancelOrderUsecase {
 		for (OrderItem orderItem : orderItems) {
 			itemOrderStockOutPort.stockOut(orderItem.getItem(), orderItem.getOrderQuantity());
 		}
-		//TODO 무료 상품은 바로 결제 완료 처리하기
 		saveOrderPort.save(order);
 		return order;
 	}
@@ -61,7 +62,7 @@ public class OrderService implements CreateOrderUsecase, CancelOrderUsecase {
 			throw new IllegalArgumentException("배송이 시작되어 주문을 취소 할 수 없습니다.");
 		}
 		if (order.isPayed()) {
-			// 환불 요청
+			cancelPaymentPort.request(order);
 		}
 		List<OrderItem> orderItems = order.getOrderItems();
 		for (OrderItem orderItem : orderItems) {
