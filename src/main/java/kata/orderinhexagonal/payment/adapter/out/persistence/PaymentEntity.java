@@ -58,7 +58,7 @@ public class PaymentEntity {
 		this.status = status;
 	}
 
-	public void paymentCancellation() {
+	public void paymentCancellationRequest() {
 		this.status = PaymentStatus.CANCELLATION_REQUEST;
 	}
 }
