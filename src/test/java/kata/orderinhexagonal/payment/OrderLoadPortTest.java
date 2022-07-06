@@ -1,6 +1,8 @@
 package kata.orderinhexagonal.payment;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +24,20 @@ class OrderLoadPortTest {
 
 	@Autowired
 	OrderLoadPort orderLoadPort;
+
+	@BeforeEach
+	void setUp() {
+	    orderFixture.clearOrder();
+		memberFixture.clearMember();
+	}
+
+
+	@AfterEach
+	void tearDown() {
+		orderFixture.clearOrder();
+		memberFixture.clearMember();
+	}
+
 
 	@Test
 	void 주문정보불러오기() {

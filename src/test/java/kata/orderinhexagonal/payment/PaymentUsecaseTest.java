@@ -1,6 +1,8 @@
 package kata.orderinhexagonal.payment;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,6 +31,20 @@ class PaymentUsecaseTest {
 	@Autowired
 	PaymentUsecase paymentUsecase;
 
+	@BeforeEach
+	void setUp() {
+	    orderFixture.clearOrder();
+		memberFixture.clearMember();
+	}
+
+	@AfterEach
+	void tearDown() {
+		orderFixture.clearOrder();
+		memberFixture.clearMember();
+	}
+
+
+
 	@Test
 	void 주문결제() {
 		// given
@@ -46,8 +62,8 @@ class PaymentUsecaseTest {
 
 		// then
 		Assertions.assertThat(payment.getId()).isPositive();
-		Assertions.assertThat(payment.getOrderId()).isEqualTo(order.getId());
-		Assertions.assertThat(payment.getPaymentPrice()).isEqualTo(order.getTotalPrice());
+		Assertions.assertThat(payment.getOrder().getId()).isEqualTo(order.getId());
+		Assertions.assertThat(payment.getOrder().getTotalPrice()).isEqualTo(order.getTotalPrice());
 		Assertions.assertThat(payment.getCardType()).isEqualTo(CardType.CREDIT_CARD);
 		Assertions.assertThat(payment.getCardCompany()).isEqualTo(CardCompany.KATA);
 		Assertions.assertThat(payment.getPaymentType()).isEqualTo(PaymentType.PAY_IN_FULL);
