@@ -58,4 +58,16 @@ public class Order {
 		}
 		return orderPrice;
 	}
+
+	public boolean isOrdererAndTheRequesterMatch(Member cancelRequestor) {
+		return this.getMember().equals(cancelRequestor);
+	}
+
+	public boolean isDeliverd() {
+		return OrderStatus.DELIVERED.equals(this.status);
+	}
+
+	public boolean isPayed() {
+		return OrderStatus.PAYED.equals(this.status);;
+	}
 }
