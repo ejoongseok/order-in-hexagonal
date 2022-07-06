@@ -56,7 +56,7 @@ public class OrderEntity {
 		this.status = OrderStatus.CANCELED;
 	}
 
-	public void updateStatus(OrderStatus status) {
+	public void changeStatus(OrderStatus status) {
 		this.status = status;
 	}
 }
