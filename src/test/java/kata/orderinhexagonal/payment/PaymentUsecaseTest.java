@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
+import kata.orderinhexagonal.fixture.PaymentFixture;
 import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
 import kata.orderinhexagonal.order.domain.Order;
@@ -31,14 +32,19 @@ class PaymentUsecaseTest {
 	@Autowired
 	PaymentUsecase paymentUsecase;
 
+	@Autowired
+	PaymentFixture paymentFixture;
+
 	@BeforeEach
 	void setUp() {
+		paymentFixture.clearPayment();
 	    orderFixture.clearOrder();
 		memberFixture.clearMember();
 	}
 
 	@AfterEach
 	void tearDown() {
+		paymentFixture.clearPayment();
 		orderFixture.clearOrder();
 		memberFixture.clearMember();
 	}
@@ -70,7 +76,7 @@ class PaymentUsecaseTest {
 		Assertions.assertThat(payment.getCardNumber()).isEqualTo(cardNumber);
 		Assertions.assertThat(payment.getCardCvc()).isEqualTo(cardCvc);
 		Assertions.assertThat(payment.getStatus()).isEqualTo(PaymentStatus.OK);
-		Assertions.assertThat(order.getStatus()).isEqualTo(OrderStatus.PAYED);
+		Assertions.assertThat(payment.getOrder().getStatus()).isEqualTo(OrderStatus.PAYED);
 		OrderEntity orderEntity = orderFixture.getOrderEntity(order.getId());
 		Assertions.assertThat(orderEntity.getStatus()).isEqualTo(OrderStatus.PAYED);
 	}
