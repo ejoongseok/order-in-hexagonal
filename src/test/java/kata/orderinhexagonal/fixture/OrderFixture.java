@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import kata.orderinhexagonal.item.domain.Item;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
+import kata.orderinhexagonal.order.adapter.out.persistence.OrderMapper;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderRepository;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderUsecase;
@@ -28,8 +29,16 @@ public class OrderFixture {
 	@Autowired
 	StockFixture stockFixture;
 
+	@Autowired OrderMapper orderMapper;
+
 	public OrderEntity getOrderEntity(Long id) {
 		return orderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Order not found"));
+	}
+
+	public Order getOrder(Long id) {
+		OrderEntity entity = orderRepository.findById(id)
+			.orElseThrow(() -> new IllegalArgumentException("Order not found"));
+		return orderMapper.toDomain(entity);
 	}
 
 	public void clearOrder() {
