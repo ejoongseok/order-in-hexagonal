@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import kata.orderinhexagonal.discount.adapter.out.web.DiscountItemLoadAdapter;
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.domain.Order;
+import kata.orderinhexagonal.payment.application.port.out.OrderLoadPort;
 
 @SpringBootTest
 class OrderLoadPortTest {
