@@ -13,6 +13,7 @@ import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.fixture.PaymentFixture;
 import kata.orderinhexagonal.member.domain.Member;
+import kata.orderinhexagonal.order.application.port.out.CancelPaymentPort;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.payment.adapter.out.persistence.PaymentEntity;
 import kata.orderinhexagonal.payment.domain.Payment;
@@ -35,21 +36,21 @@ class CancelPaymentPortTest {
 	@BeforeEach
 	void setUp() {
 		paymentFixture.clearPayment();
-		memberFixture.clearMember();
 		orderFixture.clearOrder();
+		memberFixture.clearMember();
 	}
 
 	@AfterEach
 	void tearDown() {
 		paymentFixture.clearPayment();
-		memberFixture.clearMember();
 		orderFixture.clearOrder();
+		memberFixture.clearMember();
 	}
 
 
 
 	@Test
-	void 결제_취소() {
+	void 결제_취소() throws InterruptedException {
 		// given
 		Member member = memberFixture.createMember("이중석", "ejoongseok@gmail.com", "대전광역시 서구");
 		Order order = orderFixture.createOrder(member.getId());
@@ -57,6 +58,7 @@ class CancelPaymentPortTest {
 		// when
 		cancelPaymentPort.request(order);
 		// then
+		Thread.sleep(1000);
 		PaymentEntity paymentEntity = paymentFixture.getPaymentEntity(payment.getId());
 		Assertions.assertThat(paymentEntity.getStatus()).isEqualTo(PaymentStatus.CANCELLATION_REQUEST);
 	}
