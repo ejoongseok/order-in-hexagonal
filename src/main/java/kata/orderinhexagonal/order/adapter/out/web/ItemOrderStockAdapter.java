@@ -20,7 +20,7 @@ public class ItemOrderStockAdapter implements ItemOrderStockOutPort, CancelStock
 	}
 
 	@Override
-	public Stock cancelStockOutItem(Item cancelOrderItem, int orderQuantity) {
-		return itemOrderStockNetworkClient.stockIn(cancelOrderItem, orderQuantity);
+	public void cancelStockOutItem(Item cancelOrderItem, int orderQuantity) {
+		itemOrderStockNetworkClient.stockIn(cancelOrderItem, orderQuantity);
 	}
 }
