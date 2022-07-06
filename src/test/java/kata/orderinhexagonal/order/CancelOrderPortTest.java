@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.member.domain.Member;
+import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
 import kata.orderinhexagonal.order.application.port.out.CancelOrderPort;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderStatus;
@@ -33,6 +34,8 @@ class CancelOrderPortTest {
 	    cancelOrderPort.cancel(cancelOrder);
 		// then
 		Assertions.assertThat(cancelOrder.getStatus()).isEqualTo(OrderStatus.CANCELED);
+		OrderEntity orderEntity = orderFixture.getOrderEntity(cancelOrder.getId());
+		Assertions.assertThat(orderEntity.getStatus()).isEqualTo(OrderStatus.CANCELED);
 	}
 
 }
