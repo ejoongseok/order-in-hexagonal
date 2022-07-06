@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
+import kata.orderinhexagonal.fixture.PaymentFixture;
 import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
 import kata.orderinhexagonal.order.domain.Order;
@@ -39,15 +40,18 @@ class PaymentApiTest {
 
 	@Autowired MemberFixture memberFixture;
 
+	@Autowired
+	PaymentFixture paymentFixture;
+
 	@BeforeEach
 	void setUp() {
-		// paymentRepository.deleteAll();
+		paymentFixture.clearPayment();
 	    orderFixture.clearOrder();
 		memberFixture.clearMember();
 	}
 	@AfterEach
 	void tearDown() {
-		// paymentRepository.deleteAll();
+		paymentFixture.clearPayment();
 	    orderFixture.clearOrder();
 		memberFixture.clearMember();
 	}
@@ -78,9 +82,9 @@ class PaymentApiTest {
 		Assertions.assertThat(paymentResponse.getOrderId()).isEqualTo(order.getId());
 		OrderEntity orderEntity = orderFixture.getOrderEntity(order.getId());
 		Assertions.assertThat(orderEntity.getStatus()).isEqualTo(OrderStatus.PAYED);
-		Order getOrder = orderFixture.getOrder(order.getId());
 		Assertions.assertThat(paymentResponse.getPaymentType()).isEqualTo(PaymentType.PAY_IN_FULL);
 		Assertions.assertThat(paymentResponse.getCardType()).isEqualTo(CardType.CREDIT_CARD);
+		Assertions.assertThat(paymentResponse.getPaymentPrice()).isEqualTo(order.getTotalPrice());
 	}
 
 }
