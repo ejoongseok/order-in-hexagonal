@@ -9,6 +9,8 @@ import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.domain.Order;
+import kata.orderinhexagonal.payment.application.port.out.RequestPay;
+import kata.orderinhexagonal.payment.application.port.out.RequestPayPort;
 import kata.orderinhexagonal.payment.domain.CardCompany;
 import kata.orderinhexagonal.payment.domain.CardType;
 import kata.orderinhexagonal.payment.domain.PaymentStatus;
@@ -36,9 +38,9 @@ class RequestPayPortTest {
 		String cardCvc = "123";
 		int paymentPrice = order.getTotalPrice();
 		PaymentType paymentType = PaymentType.PAY_IN_FULL;
-
+		RequestPay requestPay = RequestPay.of(cardType, cardCompany, cardNumber, cardCvc, paymentPrice, paymentType);
 		// when
-		PaymentStatus resultPaymentStatus = requestPayPort.pay(cardType, cardCompany, cardNumber, cardCvc, paymentPrice, paymentType);
+		PaymentStatus resultPaymentStatus = requestPayPort.pay(requestPay);
 
 		// then
 		Assertions.assertThat(resultPaymentStatus).isEqualTo(PaymentStatus.OK);
