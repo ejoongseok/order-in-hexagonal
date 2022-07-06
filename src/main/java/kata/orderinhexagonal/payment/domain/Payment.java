@@ -1,9 +1,12 @@
 package kata.orderinhexagonal.payment.domain;
 
+import kata.orderinhexagonal.order.domain.Order;
+import lombok.Getter;
+
+@Getter
 public class Payment {
 	private Long id;
-	private Long orderId;
-	private int paymentPrice;
+	private Order order;
 	private PaymentType paymentType;
 	private CardType cardType;
 	private CardCompany cardCompany;
@@ -11,39 +14,14 @@ public class Payment {
 	private String cardCvc;
 	private PaymentStatus status;
 
-	public Long getId() {
-		return id;
-	}
-
-	public Long getOrderId() {
-		return orderId;
-	}
-
-	public int getPaymentPrice() {
-		return paymentPrice;
-	}
-
-	public PaymentType getPaymentType() {
-		return paymentType;
-	}
-
-	public CardType getCardType() {
-		return cardType;
-	}
-
-	public CardCompany getCardCompany() {
-		return cardCompany;
-	}
-
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-	public String getCardCvc() {
-		return cardCvc;
-	}
-
-	public PaymentStatus getStatus() {
-		return status;
+	public Payment(Order order, PaymentType paymentType, CardType cardType, CardCompany cardCompany, String cardNumber,
+		String cardCvc, PaymentStatus paymentStatus) {
+		this.order = order;
+		this.paymentType = paymentType;
+		this.cardType = cardType;
+		this.cardCompany = cardCompany;
+		this.cardNumber = cardNumber;
+		this.cardCvc = cardCvc;
+		this.status = paymentStatus;
 	}
 }
