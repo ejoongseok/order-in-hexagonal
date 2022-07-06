@@ -15,11 +15,11 @@ public class OrderPaymentNetworkMonolithicClient implements OrderPaymentNetworkC
 
 	@Override
 	@Transactional
-	public void cancelPaymentRequest(Long id) {
-		PaymentEntity paymentEntity = paymentRepository.findPaymentWithOrderByOrderId(id)
+	public void cancelPaymentRequest(Long orderId) {
+		PaymentEntity paymentEntity = paymentRepository.findByOrderId(orderId)
 			.orElseThrow(() -> new IllegalArgumentException("Payment not found"));
 
-		paymentEntity.paymentCancellation();
+		paymentEntity.paymentCancellationRequest();
 
 	}
 }
