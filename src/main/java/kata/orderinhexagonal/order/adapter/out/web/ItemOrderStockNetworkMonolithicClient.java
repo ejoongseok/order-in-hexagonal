@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import kata.orderinhexagonal.item.domain.Item;
+import kata.orderinhexagonal.stock.application.port.in.StockInRequest;
 import kata.orderinhexagonal.stock.application.port.in.StockOutRequest;
 import lombok.RequiredArgsConstructor;
 
@@ -16,5 +17,11 @@ public class ItemOrderStockNetworkMonolithicClient implements ItemOrderStockNetw
 	public void stockOut(Item item, int stockOutQuantity) {
 		item.stockOutQuantity(stockOutQuantity);
 		eventPublisher.publishEvent(new OrderItemStockOutEvent(StockOutRequest.of(item.getId(), stockOutQuantity)));
+	}
+
+	@Override
+	public void stockIn(Item cancelOrderItem, int orderQuantity) {
+		cancelOrderItem.stockInQuantity(orderQuantity);
+		eventPublisher.publishEvent(new CancelOrderItemStockRollbackEvent(StockInRequest.of(cancelOrderItem.getId(), orderQuantity)));
 	}
 }
