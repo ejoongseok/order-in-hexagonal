@@ -3,7 +3,9 @@ package kata.orderinhexagonal.payment.application.port.in;
 import kata.orderinhexagonal.payment.domain.CardCompany;
 import kata.orderinhexagonal.payment.domain.CardType;
 import kata.orderinhexagonal.payment.domain.PaymentType;
+import lombok.Getter;
 
+@Getter
 public class PaymentRequest {
 
 	private Long orderId;
@@ -28,33 +30,5 @@ public class PaymentRequest {
 	public static PaymentRequest of(Long orderId, int totalPrice, CardType cardType, CardCompany cardCompany,
 		String cardNumber, int cardCvc, PaymentType paymentType) {
 		return new PaymentRequest(orderId, totalPrice, cardType, cardCompany, cardNumber, cardCvc, paymentType);
-	}
-
-	public Long getOrderId() {
-		return orderId;
-	}
-
-	public int getTotalPrice() {
-		return totalPrice;
-	}
-
-	public CardType getCardType() {
-		return cardType;
-	}
-
-	public CardCompany getCardCompany() {
-		return cardCompany;
-	}
-
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-	public int getCardCvc() {
-		return cardCvc;
-	}
-
-	public PaymentType getPaymentType() {
-		return paymentType;
 	}
 }
