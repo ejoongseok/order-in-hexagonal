@@ -21,7 +21,7 @@ public class PaymentRequest {
 	private CardType cardType;
 	@NotNull(message = "카드사를 선택해주세요.")
 	private CardCompany cardCompany;
-	@Pattern(regexp = "^\\d{4}-\\d{4}-\\d{4}-\\d{4}$", message = "카드번호를 정확히 입력해주세요.")
+	@Pattern(regexp = "^\\d{16}$", message = "카드번호를 정확히 입력해주세요.")
 	@NotNull(message = "카드번호를 입력해주세요.")
 	private String cardNumber;
 	@Pattern(regexp = "^\\d{3}$", message = "카드 뒷면의 cvc 번호를 정확히 입력해주세요.")
