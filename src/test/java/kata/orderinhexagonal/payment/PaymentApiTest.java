@@ -60,7 +60,7 @@ class PaymentApiTest {
 		Member member = memberFixture.createMember("이중석", "ejoongseok@gmail.com", "대전광역시 서구");
 		Order order = orderFixture.createOrder(member.getId());
 		String cardNumber = "1234567890123456";
-		int cardCvc = 123;
+		String cardCvc = "123";
 		PaymentType paymentType = PaymentType.PAY_IN_FULL;
 		CardType cardType = CardType.CREDIT_CARD;
 		CardCompany cardCompany = CardCompany.KATA;
