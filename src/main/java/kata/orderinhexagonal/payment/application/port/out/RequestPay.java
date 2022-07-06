@@ -3,7 +3,9 @@ package kata.orderinhexagonal.payment.application.port.out;
 import kata.orderinhexagonal.payment.domain.CardCompany;
 import kata.orderinhexagonal.payment.domain.CardType;
 import kata.orderinhexagonal.payment.domain.PaymentType;
+import lombok.Getter;
 
+@Getter
 public class RequestPay {
 	private final CardType cardType;
 	private final CardCompany cardCompany;
