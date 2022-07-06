@@ -12,6 +12,7 @@ import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderStatus;
 import kata.orderinhexagonal.payment.application.port.in.PaymentRequest;
+import kata.orderinhexagonal.payment.application.port.in.PaymentUsecase;
 import kata.orderinhexagonal.payment.domain.CardCompany;
 import kata.orderinhexagonal.payment.domain.CardType;
 import kata.orderinhexagonal.payment.domain.Payment;
