@@ -9,4 +9,10 @@ public class PayClientKata implements PayClient {
 		int paymentPrice) {
 		System.out.println("helloKataPayWorld!");
 	}
+
+	@Override
+	public void refund(CardType cardType, PaymentType paymentType, String cardNumber, String cardCvc,
+		Integer paymentPrice) {
+		System.out.println("refund!");
+	}
 }

@@ -61,4 +61,8 @@ public class PaymentEntity {
 	public void paymentCancellationRequest() {
 		this.status = PaymentStatus.CANCELLATION_REQUEST;
 	}
+
+	public void cancel() {
+		this.status = PaymentStatus.CANCELED;
+	}
 }
