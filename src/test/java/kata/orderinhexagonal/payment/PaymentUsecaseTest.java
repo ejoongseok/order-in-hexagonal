@@ -14,6 +14,8 @@ import kata.orderinhexagonal.order.domain.OrderStatus;
 import kata.orderinhexagonal.payment.application.port.in.PaymentRequest;
 import kata.orderinhexagonal.payment.domain.CardCompany;
 import kata.orderinhexagonal.payment.domain.CardType;
+import kata.orderinhexagonal.payment.domain.Payment;
+import kata.orderinhexagonal.payment.domain.PaymentStatus;
 import kata.orderinhexagonal.payment.domain.PaymentType;
 
 @SpringBootTest
@@ -56,55 +58,4 @@ class PaymentUsecaseTest {
 		Assertions.assertThat(orderEntity.getStatus()).isEqualTo(OrderStatus.PAYED);
 	}
 
-	public enum PaymentStatus {
-		OK, FAILED, CANCELED
-	}
-
-	private static class Payment {
-		private Long id;
-		private Long orderId;
-		private int paymentPrice;
-		private PaymentType paymentType;
-		private CardType cardType;
-		private CardCompany cardCompany;
-		private String cardNumber;
-		private String cardCvc;
-		private PaymentStatus status;
-
-		public Long getId() {
-			return id;
-		}
-
-		public Long getOrderId() {
-			return orderId;
-		}
-
-		public int getPaymentPrice() {
-			return paymentPrice;
-		}
-
-		public PaymentType getPaymentType() {
-			return paymentType;
-		}
-
-		public CardType getCardType() {
-			return cardType;
-		}
-
-		public CardCompany getCardCompany() {
-			return cardCompany;
-		}
-
-		public String getCardNumber() {
-			return cardNumber;
-		}
-
-		public String getCardCvc() {
-			return cardCvc;
-		}
-
-		public PaymentStatus getStatus() {
-			return status;
-		}
-	}
 }
