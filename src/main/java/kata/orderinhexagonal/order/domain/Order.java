@@ -70,4 +70,8 @@ public class Order {
 	public boolean isPayed() {
 		return OrderStatus.PAYED.equals(this.status);
 	}
+
+	public void cancel() {
+		this.status = OrderStatus.CANCELED;
+	}
 }

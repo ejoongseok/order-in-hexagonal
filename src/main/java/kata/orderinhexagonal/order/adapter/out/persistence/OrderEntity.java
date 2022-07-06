@@ -51,4 +51,8 @@ public class OrderEntity {
 		orderItemEntity.setOrder(this);
 		this.orderItems.add(orderItemEntity);
 	}
+
+	public void cancel() {
+		this.status = OrderStatus.CANCELED;
+	}
 }
