@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kata.orderinhexagonal.auth.JwtProvider;
 import kata.orderinhexagonal.order.application.port.in.CancelOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CancelOrderResponse;
+import kata.orderinhexagonal.order.application.port.in.CancelOrderUsecase;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderRequest;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderResponse;
 import kata.orderinhexagonal.order.application.port.in.CreateOrderUsecase;
@@ -29,6 +30,8 @@ public class OrderController {
 	private final JwtProvider jwtProvider;
 
 	private final CreateOrderUsecase createOrderUsecase;
+
+	private final CancelOrderUsecase cancelOrderUsecase;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
@@ -47,6 +50,10 @@ public class OrderController {
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.OK)
 	public CancelOrderResponse cancelOrder(@RequestHeader(value = "Authorization") String authorization, @RequestBody CancelOrderRequest request) {
-		return null;
+		Long memberId = jwtProvider.parseToken(authorization.substring(7));
+		request.assignOrdererId(memberId);
+
+		Order cancelOrder = cancelOrderUsecase.cancelOrder(request);
+		return new CancelOrderResponse(cancelOrder);
 	}
 }
