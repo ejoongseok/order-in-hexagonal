@@ -22,6 +22,11 @@ import kata.orderinhexagonal.member.domain.Member;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.order.domain.OrderStatus;
+import kata.orderinhexagonal.payment.application.port.in.PaymentRequest;
+import kata.orderinhexagonal.payment.application.port.in.PaymentResponse;
+import kata.orderinhexagonal.payment.domain.CardCompany;
+import kata.orderinhexagonal.payment.domain.CardType;
+import kata.orderinhexagonal.payment.domain.PaymentType;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -79,99 +84,4 @@ class PaymentApiTest {
 		Assertions.assertThat(paymentResponse.getCardType()).isEqualTo(CardType.CREDIT_CARD);
 	}
 
-	private class PaymentResponse {
-		private Long id;
-		private Long orderId;
-		private int paymentPrice;
-		private PaymentType paymentType;
-		private CardType cardType;
-
-		public Long getId() {
-			return id;
-		}
-
-		public Long getOrderId() {
-			return orderId;
-		}
-
-		public int getPaymentPrice() {
-			return paymentPrice;
-		}
-
-		public PaymentType getPaymentType() {
-			return paymentType;
-		}
-
-		public CardType getCardType() {
-			return cardType;
-		}
-	}
-
-	private enum PaymentType {
-		PAY_IN_FULL
-	}
-
-	private enum CardType {
-		CREDIT_CARD
-	}
-
-	private enum CardCompany {
-		KATA
-
-	}
-
-	private static class PaymentRequest {
-
-		private Long orderId;
-		private int totalPrice;
-		private CardType cardType;
-		private CardCompany cardCompany;
-		private String cardNumber;
-		private int cardCvc;
-		private PaymentType paymentType;
-
-		public PaymentRequest(Long orderId, int totalPrice, CardType cardType, CardCompany cardCompany,
-			String cardNumber, int cardCvc, PaymentType paymentType) {
-			this.orderId = orderId;
-			this.totalPrice = totalPrice;
-			this.cardType = cardType;
-			this.cardCompany = cardCompany;
-			this.cardNumber = cardNumber;
-			this.cardCvc = cardCvc;
-			this.paymentType = paymentType;
-		}
-
-		public static PaymentRequest of(Long orderId, int totalPrice, CardType cardType, CardCompany cardCompany,
-			String cardNumber, int cardCvc, PaymentType paymentType) {
-			return new PaymentRequest(orderId, totalPrice, cardType, cardCompany, cardNumber, cardCvc, paymentType);
-		}
-
-		public Long getOrderId() {
-			return orderId;
-		}
-
-		public int getTotalPrice() {
-			return totalPrice;
-		}
-
-		public CardType getCardType() {
-			return cardType;
-		}
-
-		public CardCompany getCardCompany() {
-			return cardCompany;
-		}
-
-		public String getCardNumber() {
-			return cardNumber;
-		}
-
-		public int getCardCvc() {
-			return cardCvc;
-		}
-
-		public PaymentType getPaymentType() {
-			return paymentType;
-		}
-	}
 }
