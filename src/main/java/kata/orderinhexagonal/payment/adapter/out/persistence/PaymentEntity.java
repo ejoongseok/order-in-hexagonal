@@ -6,6 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
@@ -26,7 +27,8 @@ public class PaymentEntity {
 	@GeneratedValue
 	private Long id;
 
-	@OneToOne
+	@OneToOne(fetch = javax.persistence.FetchType.LAZY)
+	@JoinColumn(name = "order_id", unique = true, nullable = false)
 	private OrderEntity order;
 	@Column(nullable = false)
 	private String cardNumber;
@@ -54,5 +56,9 @@ public class PaymentEntity {
 		this.cardType = cardType;
 		this.cardCompany = cardCompany;
 		this.status = status;
+	}
+
+	public void paymentCancellation() {
+		this.status = PaymentStatus.CANCELLATION_REQUEST;
 	}
 }
