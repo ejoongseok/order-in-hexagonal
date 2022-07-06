@@ -17,10 +17,6 @@ public class PaymentRequest {
 
 	@NotNull(message = "주문 번호를 입력해주세요.")
 	private Long orderId;
-
-	@Min(value = 0, message = "최소 0원 이상의 금액을 입력해주세요.")
-	@NotNull(message = "결제 금액을 입력해주세요.")
-	private Integer totalPrice;
 	@NotNull(message = "결제 수단을 선택해주세요.")
 	private CardType cardType;
 	@NotNull(message = "카드사를 선택해주세요.")
@@ -34,10 +30,9 @@ public class PaymentRequest {
 	@NotNull(message = "할부 여부를 입력해주세요.")
 	private PaymentType paymentType;
 
-	public PaymentRequest(Long orderId, int totalPrice, CardType cardType, CardCompany cardCompany,
+	public PaymentRequest(Long orderId, CardType cardType, CardCompany cardCompany,
 		String cardNumber, String cardCvc, PaymentType paymentType) {
 		this.orderId = orderId;
-		this.totalPrice = totalPrice;
 		this.cardType = cardType;
 		this.cardCompany = cardCompany;
 		this.cardNumber = cardNumber;
@@ -45,8 +40,8 @@ public class PaymentRequest {
 		this.paymentType = paymentType;
 	}
 
-	public static PaymentRequest of(Long orderId, int totalPrice, CardType cardType, CardCompany cardCompany,
+	public static PaymentRequest of(Long orderId, CardType cardType, CardCompany cardCompany,
 		String cardNumber, String cardCvc, PaymentType paymentType) {
-		return new PaymentRequest(orderId, totalPrice, cardType, cardCompany, cardNumber, cardCvc, paymentType);
+		return new PaymentRequest(orderId, cardType, cardCompany, cardNumber, cardCvc, paymentType);
 	}
 }

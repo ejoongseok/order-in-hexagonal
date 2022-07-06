@@ -37,7 +37,7 @@ class PaymentUsecaseTest {
 
 		String cardNumber = "1234567890123456";
 		String cardCvc = "123";
-		PaymentRequest request = PaymentRequest.of(order.getId(), order.getTotalPrice(), CardType.CREDIT_CARD,
+		PaymentRequest request = PaymentRequest.of(order.getId(), CardType.CREDIT_CARD,
 			CardCompany.KATA,
 			cardNumber, cardCvc, PaymentType.PAY_IN_FULL);
 

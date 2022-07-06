@@ -64,7 +64,7 @@ class PaymentApiTest {
 		PaymentType paymentType = PaymentType.PAY_IN_FULL;
 		CardType cardType = CardType.CREDIT_CARD;
 		CardCompany cardCompany = CardCompany.KATA;
-		PaymentRequest request = PaymentRequest.of(order.getId(), order.getTotalPrice(), cardType, cardCompany, cardNumber, cardCvc, paymentType);
+		PaymentRequest request = PaymentRequest.of(order.getId(), cardType, cardCompany, cardNumber, cardCvc, paymentType);
 		// when
 		MockHttpServletResponse response = mockMvc.perform(post("/payments")
 			.contentType(MediaType.APPLICATION_JSON)
@@ -79,7 +79,6 @@ class PaymentApiTest {
 		OrderEntity orderEntity = orderFixture.getOrderEntity(order.getId());
 		Assertions.assertThat(orderEntity.getStatus()).isEqualTo(OrderStatus.PAYED);
 		Order getOrder = orderFixture.getOrder(order.getId());
-		Assertions.assertThat(paymentResponse.getPaymentPrice()).isEqualTo(getOrder.getTotalPrice());
 		Assertions.assertThat(paymentResponse.getPaymentType()).isEqualTo(PaymentType.PAY_IN_FULL);
 		Assertions.assertThat(paymentResponse.getCardType()).isEqualTo(CardType.CREDIT_CARD);
 	}
