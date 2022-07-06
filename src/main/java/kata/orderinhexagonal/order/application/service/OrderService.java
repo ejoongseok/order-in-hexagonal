@@ -45,6 +45,7 @@ public class OrderService implements CreateOrderUsecase, CancelOrderUsecase {
 		for (OrderItem orderItem : orderItems) {
 			itemOrderStockOutPort.stockOut(orderItem.getItem(), orderItem.getOrderQuantity());
 		}
+		//TODO 무료 상품은 바로 결제 완료 처리하기
 		saveOrderPort.save(order);
 		return order;
 	}
