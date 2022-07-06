@@ -24,4 +24,8 @@ public class Payment {
 		this.cardCvc = cardCvc;
 		this.status = paymentStatus;
 	}
+
+	public void assignId(Long id) {
+		this.id = id;
+	}
 }
