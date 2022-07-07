@@ -37,4 +37,8 @@ public class Delivery {
 	public LocalDateTime getCreatedDateTime() {
 		return createdDateTime;
 	}
+
+	public void assignId(Long id) {
+		this.id = id;
+	}
 }
