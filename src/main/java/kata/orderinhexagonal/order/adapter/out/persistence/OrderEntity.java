@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import kata.orderinhexagonal.delivery.adapter.out.persistence.OrderDeliveryEntity;
 import kata.orderinhexagonal.member.adapter.out.persistence.MemberEntity;
 import kata.orderinhexagonal.order.domain.OrderStatus;
 import lombok.AccessLevel;
@@ -37,6 +38,9 @@ public class OrderEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private MemberEntity member;
+
+	@OneToMany(mappedBy = "order", orphanRemoval = true)
+	List<OrderDeliveryEntity> orderDeliveries = new ArrayList<>();
 
 	public OrderEntity(Long id, OrderStatus status) {
 		this.id = id;
