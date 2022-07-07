@@ -1,5 +1,7 @@
 package kata.orderinhexagonal.delivery;
 
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,9 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import kata.orderinhexagonal.delivery.adapter.out.persistence.DeliveryEntity;
+import kata.orderinhexagonal.delivery.adapter.out.persistence.OrderDeliveryEntity;
+import kata.orderinhexagonal.delivery.application.port.out.SaveDeliveryPort;
 import kata.orderinhexagonal.delivery.domain.Delivery;
 import kata.orderinhexagonal.delivery.domain.DeliveryStatus;
-import kata.orderinhexagonal.discount.adapter.out.persistence.CreateDiscountAdapter;
+import kata.orderinhexagonal.fixture.DeliveryFixture;
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.member.domain.Member;
@@ -26,15 +31,19 @@ class SaveDeliveryPortTest {
 
 	@Autowired
 	SaveDeliveryPort saveDeliveryPort;
+	@Autowired
+	DeliveryFixture deliveryFixture;
 
 	@BeforeEach
 	void setUp() {
+		deliveryFixture.clearDelivery();
 		orderFixture.clearOrder();
 		memberFixture.clearMember();
 	}
 
 	@AfterEach
 	void tearDown() {
+		deliveryFixture.clearDelivery();
 		orderFixture.clearOrder();
 		memberFixture.clearMember();
 	}
