@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import kata.orderinhexagonal.delivery.application.port.in.CreateDeliveryUsecase;
 import kata.orderinhexagonal.delivery.application.port.in.DeliveryRequest;
 import kata.orderinhexagonal.delivery.application.port.in.DeliveryResponse;
+import kata.orderinhexagonal.delivery.domain.Delivery;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/delivery")
+@RequiredArgsConstructor
 public class DeliveryController {
+
+	private final CreateDeliveryUsecase createDeliveryUsecase;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
@@ -24,6 +30,8 @@ public class DeliveryController {
 			throw new IllegalArgumentException(errors.getAllErrors().toString());
 		}
 
-		return new DeliveryResponse();
+		Delivery delivery = createDeliveryUsecase.create(request);
+
+		return new DeliveryResponse(delivery);
 	}
 }
