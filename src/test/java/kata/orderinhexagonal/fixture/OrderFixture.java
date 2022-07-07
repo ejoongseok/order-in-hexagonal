@@ -35,12 +35,6 @@ public class OrderFixture {
 		return orderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Order not found"));
 	}
 
-	public Order getOrder(Long id) {
-		OrderEntity entity = orderRepository.findById(id)
-			.orElseThrow(() -> new IllegalArgumentException("Order not found"));
-		return orderMapper.toDomain(entity);
-	}
-
 	public void clearOrder() {
 		orderRepository.deleteAll();
 	}
