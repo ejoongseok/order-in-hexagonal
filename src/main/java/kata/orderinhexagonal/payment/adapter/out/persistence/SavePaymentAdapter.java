@@ -3,8 +3,9 @@ package kata.orderinhexagonal.payment.adapter.out.persistence;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import kata.orderinhexagonal.order.adapter.out.persistence.FindOrderAdapter;
 import kata.orderinhexagonal.order.adapter.out.persistence.OrderEntity;
-import kata.orderinhexagonal.order.adapter.out.persistence.OrderRepository;
+import kata.orderinhexagonal.order.adapter.out.persistence.OrderStatusChangeAdapter;
 import kata.orderinhexagonal.order.domain.Order;
 import kata.orderinhexagonal.payment.application.port.out.PaymentSavePort;
 import kata.orderinhexagonal.payment.domain.Payment;
@@ -14,7 +15,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SavePaymentAdapter implements PaymentSavePort {
 
-	private final OrderRepository orderRepository;
+	private final OrderStatusChangeAdapter orderStatusChangeAdapter;
+	private final FindOrderAdapter findOrderAdapter;
 
 	private final PaymentRepository paymentRepository;
 
@@ -22,9 +24,8 @@ public class SavePaymentAdapter implements PaymentSavePort {
 	@Transactional
 	public void save(Payment payment) {
 		Order order = payment.getOrder();
-		OrderEntity orderEntity = orderRepository.findById(order.getId())
-			.orElseThrow(() -> new IllegalArgumentException("Order not found"));
-		orderEntity.changeStatus(order.getStatus());
+		orderStatusChangeAdapter.statusChange(order);
+		OrderEntity orderEntity = findOrderAdapter.loadOrderEntity(order.getId());
 		PaymentEntity paymentEntity = new PaymentEntity(orderEntity, payment.getCardNumber(), payment.getCardCvc(), order.getTotalPrice(), payment.getPaymentType(), payment.getCardType(), payment.getCardCompany(), payment.getStatus());
 		paymentRepository.save(paymentEntity);
 
