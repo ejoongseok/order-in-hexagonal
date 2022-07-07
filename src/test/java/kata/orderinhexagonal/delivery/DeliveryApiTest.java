@@ -2,8 +2,6 @@ package kata.orderinhexagonal.delivery;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import java.time.LocalDateTime;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kata.orderinhexagonal.delivery.application.port.in.DeliveryRequest;
+import kata.orderinhexagonal.delivery.application.port.in.DeliveryResponse;
+import kata.orderinhexagonal.delivery.domain.DeliveryStatus;
 import kata.orderinhexagonal.fixture.MemberFixture;
 import kata.orderinhexagonal.fixture.OrderFixture;
 import kata.orderinhexagonal.member.domain.Member;
@@ -75,63 +76,4 @@ class DeliveryApiTest {
 		Assertions.assertThat(deliveryResponse.getOrderId()).isEqualTo(order.getId());
 	}
 
-	private static class DeliveryResponse {
-		private Long id;
-		private DeliveryStatus status;
-		private String location;
-		private LocalDateTime createdDateTime;
-		private Long orderId;
-
-		public Long getId() {
-			return id;
-		}
-
-		public DeliveryStatus getStatus() {
-			return status;
-		}
-
-		public String getLocation() {
-			return location;
-		}
-
-		public LocalDateTime getCreatedDateTime() {
-			return createdDateTime;
-		}
-
-		public Long getOrderId() {
-			return orderId;
-		}
-	}
-
-	public enum DeliveryStatus {
-		SHIPPING, DELIVERED
-	}
-
-	private static class DeliveryRequest {
-		private Long orderId;
-		private DeliveryStatus deliveryStatus;
-		private String location;
-
-		public DeliveryRequest(Long orderId, DeliveryStatus deliveryStatus, String location) {
-			this.orderId = orderId;
-			this.deliveryStatus = deliveryStatus;
-			this.location = location;
-		}
-
-		public static DeliveryRequest of(Long orderId, DeliveryStatus deliveryStatus, String location) {
-			return new DeliveryRequest(orderId, deliveryStatus, location);
-		}
-
-		public Long getOrderId() {
-			return orderId;
-		}
-
-		public DeliveryStatus getDeliveryStatus() {
-			return deliveryStatus;
-		}
-
-		public String getLocation() {
-			return location;
-		}
-	}
 }
