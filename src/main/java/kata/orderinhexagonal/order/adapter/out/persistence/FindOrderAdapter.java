@@ -30,4 +30,10 @@ public class FindOrderAdapter implements LoadOrderPort {
 
 		return order;
 	}
+
+	@Override
+	public OrderEntity loadOrderEntity(Long orderId) {
+		return orderRepository.findById(orderId)
+			.orElseThrow(() -> new IllegalArgumentException("Order not found"));
+	}
 }
