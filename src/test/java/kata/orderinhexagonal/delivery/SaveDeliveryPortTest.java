@@ -76,4 +76,24 @@ class SaveDeliveryPortTest {
 		Assertions.assertThat(orderDelivery.getDelivery().getId()).isEqualTo(delivery.getId());
 	}
 
+	@Test
+	void 배송정보여러번저장() {
+		// given
+		Member member = memberFixture.createMember("이중석", "ejoongseok@gmail.com", "대전광역시 서구");
+		Order order = orderFixture.createOrder(member.getId());
+		Delivery delivery = new Delivery(order, DeliveryStatus.SHIPPING, "옥천 물류센터");
+		Delivery delivery2 = new Delivery(order, DeliveryStatus.DELIVERED, "대전광역시 서구 집");
+		// when
+		saveDeliveryPort.save(delivery);
+		saveDeliveryPort.save(delivery2);
+
+		// then
+		List<OrderDeliveryEntity> orderDeliveryList = deliveryFixture.getOrderDeliveryList(order.getId());
+		Assertions.assertThat(orderDeliveryList).hasSize(2);
+		Assertions.assertThat(orderDeliveryList.get(0).getDelivery().getStatus()).isEqualTo(DeliveryStatus.SHIPPING);
+		Assertions.assertThat(orderDeliveryList.get(1).getDelivery().getStatus()).isEqualTo(DeliveryStatus.DELIVERED);
+		Assertions.assertThat(orderDeliveryList.get(0).getOrder()).isEqualTo(orderDeliveryList.get(1).getOrder());
+	}
+
+
 }
