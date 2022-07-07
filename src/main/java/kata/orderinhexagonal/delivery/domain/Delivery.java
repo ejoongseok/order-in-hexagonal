@@ -11,6 +11,13 @@ public class Delivery {
 	private String location;
 	private LocalDateTime createdDateTime;
 
+	public Delivery(Order order, DeliveryStatus deliveryStatus, String location) {
+		this.order = order;
+		this.status = deliveryStatus;
+		this.location = location;
+		this.createdDateTime = LocalDateTime.now();
+	}
+
 	public Long getId() {
 		return id;
 	}
