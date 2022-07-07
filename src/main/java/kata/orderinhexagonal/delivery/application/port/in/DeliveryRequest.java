@@ -3,9 +3,12 @@ package kata.orderinhexagonal.delivery.application.port.in;
 import javax.validation.constraints.NotNull;
 
 import kata.orderinhexagonal.delivery.domain.DeliveryStatus;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DeliveryRequest {
 	@NotNull(message = "주문 번호를 입력해주세요.")
 	private Long orderId;
